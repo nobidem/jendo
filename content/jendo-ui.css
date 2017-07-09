@@ -1,0 +1,713 @@
+/*! 
+	normalize.css v4.1.1 | MIT License | github.com/necolas/normalize.css 
+ */
+
+html {
+    font-family: sans-serif;
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%
+}
+
+body {
+    margin: 0;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #333;
+    background-color: #fff
+}
+
+.jd-navbar .dropdown-menu li,
+.jd-navbar .open>.dropdown-menu,
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+main,
+menu,
+nav,
+section,
+summary {
+    display: block
+}
+
+.jd-navbar ul li,
+audio,
+canvas,
+progress,
+video {
+    display: inline-block
+}
+
+audio:not([controls]) {
+    display: none;
+    height: 0
+}
+
+progress,
+sub,
+sup {
+    vertical-align: baseline
+}
+
+[hidden],
+template {
+    display: none
+}
+
+a {
+    background-color: transparent;
+    -webkit-text-decoration-skip: objects
+}
+
+a:active,
+a:hover {
+    outline-width: 0
+}
+
+abbr[title] {
+    border-bottom: none;
+    text-decoration: underline dotted
+}
+
+b,
+strong {
+    font-weight: bolder
+}
+
+dfn {
+    font-style: italic
+}
+
+h1 {
+    font-size: 2em;
+    margin: .67em 0
+}
+
+mark {
+    background-color: #ff0;
+    color: #000
+}
+
+small {
+    font-size: 80%
+}
+
+sub,
+sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative
+}
+
+sub {
+    bottom: -.25em
+}
+
+sup {
+    top: -.5em
+}
+
+img {
+    border-style: none
+}
+
+svg:not(:root) {
+    overflow: hidden
+}
+
+code,
+kbd,
+pre,
+samp {
+    font-family: monospace, monospace;
+    font-size: 1em
+}
+
+figure {
+    margin: 1em 40px
+}
+
+hr {
+    box-sizing: content-box;
+    height: 0
+}
+
+button,
+input,
+select,
+textarea {
+    font: inherit;
+    margin: 0
+}
+
+optgroup {
+    font-weight: 700
+}
+
+button,
+hr,
+input {
+    overflow: visible
+}
+
+button,
+select {
+    text-transform: none
+}
+
+[type=reset],
+[type=submit],
+button,
+html [type=button] {
+    -webkit-appearance: button
+}
+
+[type=button]::-moz-focus-inner,
+[type=reset]::-moz-focus-inner,
+[type=submit]::-moz-focus-inner,
+button::-moz-focus-inner {
+    border-style: none;
+    padding: 0
+}
+
+[type=button]:-moz-focusring,
+[type=reset]:-moz-focusring,
+[type=submit]:-moz-focusring,
+button:-moz-focusring {
+    outline: 1px dotted ButtonText
+}
+
+fieldset {
+    border: 1px solid silver;
+    margin: 0 2px;
+    padding: .35em .625em .75em
+}
+
+legend {
+    color: inherit;
+    display: table;
+    max-width: 100%;
+    white-space: normal
+}
+
+textarea {
+    overflow: auto
+}
+
+[type=checkbox],
+[type=radio],
+legend {
+    box-sizing: border-box;
+    padding: 0
+}
+
+[type=number]::-webkit-inner-spin-button,
+[type=number]::-webkit-outer-spin-button {
+    height: auto
+}
+
+[type=search] {
+    -webkit-appearance: textfield;
+    outline-offset: -2px
+}
+
+[type=search]::-webkit-search-cancel-button,
+[type=search]::-webkit-search-decoration {
+    -webkit-appearance: none
+}
+
+::-webkit-input-placeholder {
+    color: inherit;
+    opacity: .54
+}
+
+::-webkit-file-upload-button {
+    -webkit-appearance: button;
+    font: inherit
+}
+
+*,
+::after,
+::before {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box
+}
+
+.clearfix::after,
+.clearfix::before {
+    display: table;
+    content: " "
+}
+
+.clearfix::after {
+    clear: both
+}
+
+.jd-bnt {
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    outline: 0!important
+}
+
+button.jd-bnt {
+    line-height: inherit;
+    -webkit-appearance: button;
+    cursor: pointer;
+    text-transform: none;
+    margin: 0;
+    font: inherit;
+    color: inherit
+}
+
+a.jd-bnt {
+    text-decoration: none;
+    padding: 6px 12px
+}
+
+.jd-bnt-default {
+    color: #333;
+    background-color: #fff;
+    border-color: #ccc;
+    text-shadow: 0 1px 0 #fff;
+    background-repeat: repeat-x;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .15), 0 1px 1px rgba(0, 0, 0, .075)
+}
+
+.jd-bnt-gray {
+    background-color: #454545!important;
+    color: #fff!important
+}
+
+.jd-link {
+    color: #0769ad;
+    text-decoration: none;
+    background-color: transparent
+}
+
+.jd-link:hover {
+    text-decoration: underline
+}
+
+button.jd-bnt-sm {
+    padding: 5px 10px;
+    font-size: 12px;
+    line-height: 1.5;
+    border-radius: 3px
+}
+
+.jd-section {
+    padding: 10px 15px;
+    margin: 20px 0;
+    border: 1px solid rgba(0, 0, 0, .2);
+    border-left-width: 5px;
+    border-radius: 5px
+}
+
+.jd-navbar ul,
+.jd-section .jd-header h1,
+.jd-section .jd-header h2,
+.jd-section .jd-header h3,
+.jd-section .jd-header h4,
+.jd-section .jd-header h5,
+.jd-section .jd-header h6,
+.jd-section .jd-header h7 {
+    padding: 0;
+    margin: 0
+}
+
+.jd-section-info {
+    border-left-color: #0769ad
+}
+
+.jd-navbar {
+    width: 100%;
+    padding: 0 5px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box
+}
+
+.jd-navbar ul {
+    width: 100%
+}
+
+.jd-navbar ul li a,
+.jd-navbar ul li button {
+    padding: 10px;
+    display: inline-block;
+    outline: 0;
+    border: 0;
+    cursor: pointer
+}
+
+.jd-navbar .dropdown-menu {
+    display: none;
+    position: absolute;
+    width: auto;
+    padding: 5px 0
+}
+
+.jd-navbar .dropdown-menu li a {
+    padding: 3px 20px;
+    display: inline-block;
+    outline: 0
+}
+
+.jd-navbar-default {
+    background-color: #f8f8f8;
+    border: 1px solid #e7e7e7
+}
+
+.jd-navbar-default ul li a,
+.jd-navbar-default ul li button {
+    color: #777;
+    text-decoration: none;
+    background-color: transparent;
+    outline: 0!important
+}
+
+.jd-navbar-default .dropdown-menu {
+    background-color: #fff;
+    border: 1px solid #d2d2d4
+}
+
+.jd-navbar-default .dropdown-menu li a {
+    color: #333
+}
+
+.jd-dialog,
+.jd-grid table th i {
+    display: none
+}
+
+.jd-dialog-modal {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding-top: 30px;
+    height: 100%;
+    z-index: 2000;
+    display: none;
+    background-color: rgba(80, 80, 80, .6);
+    overflow: auto
+}
+
+.jd-dialog .jd-dialog-document {
+    border: 1px solid #aaa;
+    position: absolute;
+    outline: 0
+}
+
+.jd-dialog .jd-dialog-titlebar {
+    width: 100%;
+    background-color: #fff;
+    cursor: move;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+    border-bottom: 1px solid #aaa;
+    display: table
+}
+
+.jd-dialog .jd-dialog-titlebar .jd-dt-title {
+    display: table-cell;
+    padding: 5px 10px;
+    vertical-align: middle
+}
+
+.jd-dialog .jd-dialog-titlebar .jd-dt-button {
+    color: #4285f4;
+    display: table-cell;
+    font-size: 20px;
+    cursor: pointer
+}
+
+.jd-dialog .jd-dialog-titlebar .jd-dt-button button {
+    padding: 0 10px;
+    background-color: transparent
+}
+
+.jd-dialog .jd-dialog-titlebar .jd-dt-button-left {
+    text-align: left
+}
+
+.jd-dialog .jd-dialog-titlebar .jd-dt-button-right {
+    text-align: right
+}
+
+.datepicker,
+.jd-dialog .jd-dialog-content,
+.jd-dialog .jd-dialog-footer {
+    background-color: #fff
+}
+
+@media (max-width:312px) {
+    .jd-dialog-sm .jd-dialog-document {
+        width: 100%
+    }
+}
+
+@media (min-width:313px) {
+    .jd-dialog-sm .jd-dialog-document {
+        width: 300px
+    }
+}
+
+@media (max-width:624px) {
+    .jd-dialog-md .jd-dialog-document {
+        width: 100%
+    }
+}
+
+@media (min-width:625px) {
+    .jd-dialog-md .jd-dialog-document {
+        width: 600px
+    }
+}
+
+@media (max-width:936px) {
+    .jd-dialog-lg .jd-dialog-document {
+        width: 100%
+    }
+}
+
+@media (min-width:937px) {
+    .jd-dialog-lg .jd-dialog-document {
+        width: 900px
+    }
+}
+
+.datepicker {
+    border: 1px solid gray;
+    padding: 2px 2px 5px;
+    display: none;
+    width: 228px;
+    text-align: center;
+    border-radius: 5px;
+    position: absolute
+}
+
+.datepicker .dp-head {
+    width: 100%;
+    display: table;
+    padding: 5px 0
+}
+
+.datepicker .dp-head .dph-title {
+    display: table-cell;
+    text-align: center
+}
+
+.datepicker .dp-head .dph-title button {
+    font-size: 14px;
+    font-weight: 700;
+    border: 0;
+    background-color: transparent;
+    cursor: pointer
+}
+
+.datepicker .dp-head .dph-title button::-moz-focus-inner,
+.datepicker .dp-head .dph-title button:focus {
+    outline: 0!important;
+    border: 0
+}
+
+.datepicker .dp-head .dph-left {
+    display: table-cell;
+    text-align: left;
+    font-size: 14px;
+    font-weight: 700
+}
+
+.datepicker .dp-head .dph-right {
+    display: table-cell;
+    text-align: right
+}
+
+.datepicker .dp-head .dph-left button,
+.datepicker .dp-head .dph-right button {
+    border: 0;
+    background-color: transparent;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer
+}
+
+.datepicker .dp-month,
+.datepicker .dp-months {
+    display: inline-block;
+    width: 224px
+}
+
+.datepicker .dp-month .dpm-weekdays {
+    display: table;
+    width: 100%
+}
+
+.datepicker .dp-month .dpm-weekdays .dpm-weekday {
+    display: table-cell;
+    width: 32px;
+    height: 30px;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 700;
+    vertical-align: middle
+}
+
+.datepicker .dp-month .dpm-days {
+    width: 100%;
+    display: inline-block
+}
+
+.datepicker .dp-month .dpm-days .dpm-day,
+.datepicker .dp-months .dpm-month {
+    border: 0;
+    width: 32px;
+    height: 25px;
+    display: inline-block;
+    text-align: center;
+    vertical-align: top;
+    background-color: #fff;
+    cursor: pointer;
+    border-radius: 5px
+}
+
+.datepicker .dp-month .dpm-days .dpm-day:hover,
+.datepicker .dp-months .dpm-month:hover {
+    background-color: #eaeaea
+}
+
+.datepicker .dp-months {
+    border: 0
+}
+
+.datepicker .dp-months .dpm-month {
+    width: 56px;
+    height: 60px
+}
+
+.datepicker .dp-months .dpm-outside {
+    color: gray
+}
+
+.jd-grid {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none
+}
+
+.jd-grid table {
+    border-top: 1px solid #d5d5d5;
+    border-left: 1px solid #d5d5d5;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin: 0
+}
+
+.jd-grid table th {
+    background-color: #efeeee;
+    padding: 3px 5px;
+    outline: 0;
+    cursor: pointer
+}
+
+.jd-grid table th.jd-field-sort {
+    color: red
+}
+
+.jd-grid table th.jd-field-sort .jd-sort-asc {
+    display: inline-block;
+    float: right;
+    padding-top: 3px
+}
+
+.jd-grid table th.jd-field-desort .jd-sort-asc,
+.jd-grid table th.jd-field-sort .jd-sort-desc {
+    display: none
+}
+
+.jd-grid table th.jd-field-desort {
+    color: #00f
+}
+
+.jd-grid table th.jd-field-desort .jd-sort-desc {
+    display: inline-block;
+    float: right;
+    padding-bottom: 3px
+}
+
+.jd-grid table th,
+.jd-grid table tr td,
+.jd-grid table tr.jd-alt td {
+    border-bottom: 1px solid #d5d5d5;
+    border-right: 1px solid #d5d5d5
+}
+
+.jd-grid table tr td {
+    padding: 2px 5px;
+    font-size: 14px;
+    background-color: #fff
+}
+
+.jd-grid table tr.jd-alt td {
+    background-color: #f1f1f1
+}
+
+.jd-grid table .jd-grid-bnt-link {
+    border: 0;
+    background-color: transparent;
+    cursor: pointer;
+    outline: 0
+}
+
+.jd-grid .jd-pager td {
+    padding-top: 7px;
+    padding-bottom: 5px
+}
+
+.jd-grid .jd-pager .jd-pager-btn {
+    outline: 0;
+    border: 1px solid #d5d5d5;
+    background-color: #f1f1f1;
+    cursor: pointer
+}
+
+.jd-grid .jd-pager .jd-pager-panel {
+    display: inline-block;
+    padding: 0 15px
+}
+
+.jd-grid .jd-pager .jd-pager-panel span {
+    padding: 0 5px
+}
+
+.jd-grid .jd-pager .jd-pager-panel input[type=text] {
+    padding-top: 0;
+    padding-bottom: 0;
+    width: 40px
+}
