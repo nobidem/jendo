@@ -1,0 +1,28 @@
+﻿<div id="postContent" class="gt-content"></div>
+<script>
+    var jsonContent = [{
+        title: '.find()',
+        link: _.route.pageLink('/traversing/find'),
+        text: 'Избира елементи от наследниците на избраните елемени',
+        meta: ''
+    }, {
+        title: '.is()',
+        link: _.route.pageLink('/traversing/is'),
+        text: 'Проверява за съвпадение на елементи и дава true, ако поне един отговаря на условията.',
+        meta: ''
+    }, {
+        title: '.isContains()',
+        link: _.route.pageLink('/traversing/iscontains'),
+        text: 'Дава булева стойност, показваща дали възела е потомък на определен възел.',
+        meta: ''
+    }, {
+        title: '.isEqual()',
+        link: _.route.pageLink('/traversing/isequal'),
+        text: 'Дава булева стойност, показваща дали две възли са равни.',
+        meta: ''
+    }];
+
+    _.ready(function () {
+        _.section('#postContent').load(jsonContent);
+    });
+</script>

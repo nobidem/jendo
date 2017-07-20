@@ -1,0 +1,58 @@
+﻿<h3>.prop( property )</h3>
+<div class="example-container">
+    <input id="ex1_check_1" type="checkbox" checked="checked">
+    <br />
+    <div id="ex1_div_1" title="Hi Jendo">example 1</div>
+</div>
+<h3>.prop( property, value )</h3>
+<div class="example-container">
+    <ul id="ex2_ul_1">
+        <li>item 1</li>
+        <li>item 2</li>
+        <li>item 3</li>
+    </ul>
+    <br />
+    <input id="check1" type="checkbox" checked="checked" />
+    <input id="check2" type="checkbox" />
+</div>
+<h3>.prop( { property:value, property:value, ... } )</h3>
+<div class="example-container">
+    <div class="example3">example 3a</div>
+    <div class="example3">example 3b</div>
+</div>
+<h3>.prop(property, function(index, currentvalue) )</h3>
+<div class="example-container">
+    <div id="ex4_div_1" class="example4">example 4a</div>
+    <div class="example4">example 4b</div>
+</div>
+<script>
+    _.ready(function () {
+        console.log('.prop("checked")', _('#ex1_check_1').prop("checked"));
+        console.log('.prop("title")', _("#ex1_div_1").prop("title"));
+        
+        _("#ex2_ul_1>li").prop('title1', 'Hi Jendo');
+        _('#check2').prop("checked", true)
+                    .prop("disabled", true);
+        _(".example3").prop({ title1: 'Hi Jendo', alt: 'Goodbye' });
+        
+        _(".example3").forEach(function (i, item) {
+            console.log('example3:' + i, 'title1', _(item).prop('title1'), 'alt', _(item).prop('alt'));
+        });
+
+        _("#ex4_div_1").prop('title1', 'Hi "1 ');
+        _(".example4").prop('title1', function (i, val) {
+            return val + ' Jendo (' + i + ')';
+        });
+
+        _(".example4").forEach(function (i, item) {            
+            console.log('example4:' + i, 'title1', _(item).prop('title1'));
+        });
+    });
+</script>
+<style>
+    .example-container {
+        display: inline-block;
+        width: 100%;
+        padding-left: 20px;
+    }
+</style>

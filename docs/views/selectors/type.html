@@ -1,0 +1,13 @@
+﻿<h3>
+    _('p').css('background-color', 'gold');
+</h3>
+<p>This is a p element.</p>
+<p>This is also a p element.</p>
+<script>
+    _.ready(function () {
+        _('p').css('background-color', 'gold');
+
+        console.log('1:', _('p'));
+        console.log('2:', _(_('p')));
+    });
+</script>

@@ -1,0 +1,62 @@
+﻿<h3>.val()</h3>
+<div class="example-container">
+    <input id="ex1_input" class="example1" value="test value" />
+    <select id="ex1_single" class="example1">
+        <option>Single</option>
+        <option>Single2</option>
+    </select>
+    <select id="ex1_multiple" multiple="multiple" class="example1">
+        <option selected="selected">Multiple</option>
+        <option>Multiple2</option>
+        <option selected="selected">Multiple3</option>
+    </select>
+</div>
+<h3>.val( value )</h3>
+<div class="example-container">
+    <input id="ex2_input_1" class="example2" value="test value" />
+    <input id="ex2_input_2" class="example2" value="test value" />
+    <select id="ex2_single" class="example2">
+        <option>Single</option>
+        <option>Single2</option>
+    </select>
+    <select id="ex2_multiple" multiple="multiple">
+        <option>Multiple</option>
+        <option>Multiple2</option>
+        <option>Multiple3</option>
+    </select>
+    <br />
+    <input type="checkbox" name="checkboxname" value="check1" class="example2_input"> check1
+    <input type="checkbox" name="checkboxname" value="check2" class="example2_input"> check2
+    <input type="radio" name="r" value="radio1" class="example2_input"> radio1
+    <input type="radio" name="r" value="radio2" class="example2_input"> radio2
+</div>
+<h3>.text( function )</h3>
+<div class="example-container">
+    <p class="example3">All new content. <em>You bet!</em></p>
+    <p class="example3">All new content. <em>You bet!</em></p>
+</div>
+<script>
+    _.ready(function () {
+        console.log('.val()', _(".example1").val(), 'length:' + _(".example1").length);
+        console.log('.val()', _("#ex1_single").val());
+        console.log('.val()', _("#ex1_multiple").val());
+
+        _(".example2").val('new test value');
+        _("#ex2_single").val("Single2");
+        _("#ex2_multiple").val(["Multiple2", "Multiple3"]);
+        _(".example2_input").val(["check1", "check2", "radio1"]);
+        // _(".example2_input").val("radio2");
+
+        _('p.example3').text(function () {
+            var emphasis = "<em>" + _("p").length + " paragraphs!</em>";
+            return "<p>All new content for " + emphasis + "</p>";
+        });
+    });
+</script>
+<style>
+    .example-container {
+        display: inline-block;
+        width: 100%;
+        padding-left: 20px;
+    }
+</style>

@@ -1,0 +1,114 @@
+﻿<h3>sortBy</h3>
+<!--
+    http://jsfiddle.net/M2ESb/
+-->
+<p>
+    <button type="button" onclick="sortArray()">Sort</button>
+    <button type="button" onclick="reverseArray()">Reverse</button>
+</p>
+<div id="array1" class="tbsort"></div>
+<div id="array2" class="tbsort"></div>
+<div id="array3" class="tbsort"></div>
+<div id="array4" class="tbsort"></div>
+<script>
+    var array1 = [
+                { recid: 1, fname: 'John', lname: 'doe', email: 'jdoe@gmail.com', sdate: new Date('2012-1-1') },
+                { recid: 2, fname: 'Stuart', lname: 'Motzart', email: 'jdoe@gmail.com', sdate: new Date('2012-1-1') },
+                { recid: 3, fname: 'Jin', lname: 'Franson', email: 'jdoe@gmail.com', sdate: new Date('2012-1-1') },
+                { recid: 4, fname: 'Susan', lname: 'Ottie', email: 'jdoe@gmail.com', sdate: new Date('2012-2-1') },
+                { recid: 5, fname: 'Kelly', lname: 'Silver', email: 'jdoe@gmail.com', sdate: new Date('2012-3-1') },
+                { recid: 6, fname: 'Francis', lname: 'Gatos', email: 'jdoe@gmail.com', sdate: new Date('2012-4-1') },
+                { recid: 7, fname: 'Mark', lname: 'Welldo', email: 'jdoe@gmail.com', sdate: new Date('2012-1-5') },
+                { recid: 8, fname: 'Thomas', lname: 'Bahh', email: 'jdoe@gmail.com', sdate: new Date('2012-6-1') },
+                { recid: 9, fname: 'Sergei', lname: 'Rachmaninov', email: 'jdoe@gmail.com', sdate: new Date('2012-10-1') },
+                { recid: 20, fname: 'Jill', lname: 'Doe', email: 'jdoe@gmail.com', sdate: new Date('2012-1-1') },
+                { recid: 21, fname: 'Frank', lname: 'Motzart', email: 'jdoe@gmail.com', sdate: new Date('2012-1-12') },
+                { recid: 22, fname: 'Peter', lname: 'Franson', email: 'jdoe@gmail.com', sdate: new Date('2015-1-1') },
+                { recid: 23, fname: 'Andrew', lname: 'Ottie', email: 'jdoe@gmail.com', sdate: new Date('2017-1-1') },
+                { recid: 24, fname: 'Manny', lname: 'Silver', email: 'jdoe@gmail.com', sdate: new Date('2018-4-1') },
+                { recid: 25, fname: 'Ben', lname: 'Gatos', email: 'jdoe@gmail.com', sdate: new Date('2012-6-3') },
+                { recid: -26, fname: 'Doer', lname: 'Welldo', email: 'jdoe@gmail.com', sdate: new Date('2013-1-1') },
+                { recid: -27, fname: 'Shashi', lname: 'bahh', email: 'jdoe@gmail.com', sdate: new Date('2010-8-23') },
+                { recid: -28, fname: 'Av', lname: 'Rachmaninov', email: 'jdoe@gmail.com', sdate: new Date('2005-2-1') }
+    ];
+
+    _.ready(function () {
+        console.log('a < D', 'a' < 'D');
+        console.log('a < d', 'a' < 'd');
+        console.log('1 < 3', '1' < '3');
+        console.log('1 < -3', '1' < '-3');
+    });
+
+    function sortArray() {
+        array1.sortBy('recid');
+        printArray('#array1', array1, 'recid');
+
+        array1.sortBy([{ field: 'lname', sort: 1 }, { field: 'fname', sort: -1 }]);
+        printArray('#array2', array1, 'lname & -fname');
+
+        array1.sortBy('email', '-recid');
+        printArray('#array3', array1, 'email & -recid');
+
+        array1.sortBy('sdate');
+        printArray('#array4', array1, 'sdate');
+    }
+
+    function reverseArray() {
+
+        array1.reverseBy('recid');
+        printArray('#array1', array1, 'recid');
+
+        array1.reverseBy([{ field: 'lname', sort: 1 }, { field: 'fname', sort: -1 }]);
+        printArray('#array2', array1, 'lname & -fname');
+        
+        array1.reverseBy('email', '-recid');
+        printArray('#array3', array1, 'email & -recid');
+
+        array1.reverseBy('sdate');
+        printArray('#array4', array1, 'sdate');
+    }
+
+    function printArray(item, value, title) {
+        var jdItem = _(item);
+        jdItem.html('');
+        jdItem.appendElementDiv().text(title);
+        var tbl = jdItem.appendElementTable().attr('cellspacing', 0);
+        // body
+        for (var i = 0; i < value.length; i++) {
+            var aRow = value[i];
+            if (i == 0) {
+                // head
+                var hRow = tbl.appendElementTRow();
+                for (rowIndex in aRow) {
+                    hRow.appendElementTD().html(rowIndex);
+                }
+            }
+            var tRow = tbl.appendElementTRow();
+            for (rowIndex in aRow) {
+                var tdData = aRow[rowIndex];
+                if (typeof tdData == 'object') {
+                    tRow.appendElementTD().html(tdData.toLocaleDateString());
+                }
+                else {
+                    tRow.appendElementTD().html(tdData);
+                }
+            }
+        }
+    }
+</script>
+<style>
+    .tbsort {
+        font-size: 12px;
+        display:inline-block;
+        padding-right: 5px;
+    }
+        .tbsort table {
+            border-top: 1px solid black;
+            border-left: 1px solid black;
+        }
+            .tbsort table td {
+                border-right: 1px solid black;
+                border-bottom: 1px solid black;
+            }
+
+</style>

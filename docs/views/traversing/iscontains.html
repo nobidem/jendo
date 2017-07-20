@@ -1,0 +1,38 @@
+﻿<h3>.isContains( selector )</h3>
+<div class="example-container">
+    <div class="example1">
+        <ul>
+            <li>item 1</li>
+            <li id="ex1_item2">item 2</li>
+            <li>item 3</li>
+            <li>item 4</li>
+        </ul>
+        <p>example1: p</p>
+    </div>
+</div>
+<script>
+    _.ready(function () {
+        
+        _('.example1>ul').isContains(function (i, item) {
+            console.log('function', i, item);
+            return false;
+        });
+        
+
+        var ex1 = _('#ex1_item2');
+        console.log('.example1>ul isContains #ex1_item2'
+            , _('.example1>ul').isContains(ex1), ex1);
+
+
+        var ex2 = _('.example1>p');
+        console.log('.example1>ul isContains #ex1_item2'
+            , _('.example1>ul').isContains(ex2), ex2);
+    });
+</script>
+<style>
+    .example-container {
+        display: inline-block;
+        width: 100%;
+        padding-left: 20px;
+    }
+</style>

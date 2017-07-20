@@ -1,0 +1,181 @@
+﻿<h3>.css( propertyName )</h3>
+<div class="example-container">
+    <div class="example1">
+        <span id="example1_result">&nbsp;</span>
+        <div style="background-color:blue;"></div>
+        <div style="background-color:rgb(15,99,30);"></div>
+        <div style="background-color:#123456;"></div>
+        <div style="background-color:#f11;"></div>
+    </div>
+</div>
+<h3>.css( propertyNames )</h3>
+<div class="example-container">
+    <div class="example2">
+        <span id="example2_result">&nbsp;</span>
+        <div id="box1">1</div>
+        <div id="box2">2</div>
+        <div id="box3">3</div>
+        <div id="box4">4</div>
+    </div>
+</div>
+<h3>.css( propertyName, value )</h3>
+<div class="example-container">
+    <div class="example3">
+        <p>Just roll the mouse over me.</p>
+        <p>Or me to see a color change.</p>
+    </div>
+</div>
+<h3>.css( propertyName, function )</h3>
+<div class="example-container">
+    <div class="example4">
+        <p>
+            Once upon a time there was a man
+            who lived in a pizza parlor. This
+            man just loved pizza and ate it all
+            the time.  He went on to be the
+            happiest man in the world.  The end.
+        </p>
+    </div>
+</div>
+<h3>.css( properties )</h3>
+<div class="example-container">
+    <div class="example5">
+        <p>Move the mouse over a paragraph.</p>
+        <p>Like this one or the one above.</p>
+    </div>
+</div>
+<h3>.css( properties )</h3>
+<div class="example-container">
+    <div class="example6">
+        <div>click</div>
+        <div>click</div>
+    </div>
+</div>
+<br />
+<br />
+<br />
+<br />
+<script>
+    _.ready(function () {
+        _("#example1_result").css();
+
+        // EX 1: .css( propertyName )
+        _(".example1>div").click(function () {
+            var color = _(this).css("background-color");
+            _("#example1_result").html("That div is <span style='color:" +
+                color + ";'>" + color + "</span>.");
+        });
+
+        // EX 2: .css( propertyNames )
+        _(".example2>div").click(function () {
+            var html = ["The clicked div has the following styles:"];
+
+            var styleProps = _(this).css([
+              "width", "height", "color", "background-color"
+            ]);
+
+            console.log(styleProps);
+            /*
+            $.each(styleProps, function (prop, value) {
+                html.push(prop + ": " + value);
+            });
+
+            $("#result").html(html.join("<br>"));
+            */
+        });
+
+        // EX 3: .css( propertyName, value )
+        _(".example3>p").on("mouseover", function () {
+            _(this).css("color", "red");
+            _(this).css("width", "50");
+        });
+
+        // EX 4: .css( propertyName, function )
+        _(".example4>p").on("click", function () {
+            _(this).css("background-color", "red");
+            _(this).css("background-color", function (i, value) {
+                console.log(i, value);
+                return "yellow";
+            });
+        });
+
+        // EX 5: .css( properties )
+        // http://api.jquery.com/css/#css-propertyName
+        _(".example5>p")
+          .on("mouseenter", function () {
+              _(this).css({
+                  "background-color": "yellow",
+                  "font-weight": "bolder"
+              });
+          })
+          .on("mouseleave", function () {
+              var styles = {
+                  backgroundColor: "#ddd",
+                  fontWeight: ""
+              };
+              _(this).css(styles);
+          });
+
+        // EX 6: .css( properties )
+        _(".example6>div").on("click", function () {
+            _(this).css({
+                width: function (index, value) {
+                    return (parseFloat(value) * 1.2) + 'px';
+                },
+                height: function (index, value) {
+                    return (parseFloat(value) * 1.2) + 'px';
+                }
+            });
+        });
+    });
+</script>
+<style>
+    .example-container {
+        display: inline-block;
+        width: 100%;
+        padding-left: 20px;
+    }
+
+    .example1 div {
+        width: 60px;
+        height: 60px;
+        margin: 5px;
+        float: left;
+    }
+
+    .example2 div {
+        height: 50px;
+        margin: 5px;
+        padding: 5px;
+        float: left;
+    }
+
+    .example2 #box1 {
+        width: 50px;
+        color: yellow;
+        background-color: blue;
+    }
+
+    .example2 #box2 {
+        width: 80px;
+        color: rgb(255, 255, 255);
+        background-color: rgb(15, 99, 30);
+    }
+
+    .example2 #box3 {
+        width: 40px;
+        color: #fcc;
+        background-color: #123456;
+    }
+
+    .example2 #box4 {
+        width: 70px;
+        background-color: #f11;
+    }
+
+    .example6 div {
+        width: 20px;
+        height: 15px;
+        background-color: #f33;
+    }
+</style>

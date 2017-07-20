@@ -1,0 +1,56 @@
+﻿<h3>QR Code</h3>
+
+<script src="/scripts/jendo-lib/qrcode-lazar.min.js"></script>
+<button type="button" onclick="QRCodeStart()">Start</button>
+<button type="button" onclick="QRCodeStop()">Stop</button>
+
+<input onchange="QRCodeFiles(this.files)" type="file" value="Image" />
+
+<div id="reader" style="width: 300px; height: 250px; margin: 0 auto;"></div>
+
+<script>
+    _.ready(function () {       
+    });
+
+    function QRCodeStart() {
+        _.QRCodeReader('#reader')
+            //.height(500)
+            //.width(700)
+            .onSuccess(function (data) {
+                // do something when code is read
+                console.log('Success:', data);
+            })
+            .onError(function (error) {
+                //show read errors 
+                console.log('Error:', error);
+            })
+            .onVideoError(function (videoError) {
+                //the video stream could be opened
+                console.log('VideoError:', videoError);
+            })
+            .start();
+    }
+
+    function QRCodeStop() {
+        _.QRCodeReader('#reader').stop();
+    }
+
+    function QRCodeFiles(handler) {
+        _.QRCodeReader('#reader')
+        //.height(500)
+        //.width(700)
+        .onSuccess(function (data) {
+            // do something when code is read
+            console.log('Success:', data);
+        })
+        .onError(function (error) {
+            //show read errors 
+            console.log('Error:', error);
+        })
+        .onVideoError(function (videoError) {
+            //the video stream could be opened
+            console.log('VideoError:', videoError);
+        })
+        .files(handler);
+    }
+</script>

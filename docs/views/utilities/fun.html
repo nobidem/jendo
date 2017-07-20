@@ -1,0 +1,102 @@
+﻿<h3>
+</h3>
+<div>
+    <button type="button" onclick="_.id('funTable').width(600);">Table Width: 600px</button>
+    <button type="button" onclick="_.id('funTable').width('100%');">Table Width: 100%</button>
+    <button type="button" onclick="_.id('funTable').width(0);">Table Width: Auto</button>
+    <button type="button" onclick="_.id('funTable').height(600);">Table Height: 600px</button>
+    <button type="button" onclick="_.id('funTable').height('100%');">Table Height: 100%</button>
+    <button type="button" onclick="_.id('funTable').height(0);">Table Height: Auto</button>
+</div>
+<table border="1" id="funTable">
+    <tr>
+        <td>_.guid()</td>
+        <td id="guid1"></td>
+    </tr>
+    <tr>
+        <td>_.guid('')</td>
+        <td id="guid2"></td>
+    </tr>
+    <tr>
+        <td>_.guid('_')</td>
+        <td id="guid3"></td>
+    </tr>
+    <tr>
+        <td>_.screenWidth()</td>
+        <td id="screenWidth"></td>
+    </tr>
+    <tr>
+        <td>_.screenHeight()</td>
+        <td id="screenHeight"></td>
+    </tr>
+    <tr>
+        <td>_.windowWidth()</td>
+        <td id="windowWidth"></td>
+    </tr>
+    <tr>
+        <td>_.windowHeight()</td>
+        <td id="windowHeight"></td>
+    </tr>
+    <tr>
+        <td>Table Width</td>
+        <td id="tableWidth"></td>
+    </tr>
+    <tr>
+        <td>Table Height</td>
+        <td id="tableHeight"></td>
+    </tr>
+    <tr>
+        <td>Data</td>
+        <td id="dataTest"></td>
+    </tr>
+</table>
+<script>
+    _.ready(function () {
+        _.id('guid1').text(_.guid());
+        _.id('guid2').text(_.guid(''));
+        _.id('guid3').text(_.guid('_'));
+
+        _.id('screenWidth').text(_.screenWidth());
+        _.id('screenHeight').text(_.screenHeight());
+        _.id('windowWidth').text(_.windowWidth());
+        _.id('windowHeight').text(_.windowHeight());
+        
+        _.id('tableWidth').text(_.id('funTable').width());
+        _.id('tableHeight').text(_.id('funTable').height());
+
+        _('#dataTest').data('data11', 'dataTest 1');
+        _('#dataTest').data('data11', 'dataTest 3');
+        _.id('dataTest').text(_('#dataTest').data('data11'));
+
+        // isNull
+        var testNull1;
+        console.log(testNull1, 'isNull', _.isNull(testNull1)
+            , 'isNullOrEmpty', _.isNullOrEmpty(testNull1)
+            , 'isNullOrWhiteSpace', _.isNullOrWhiteSpace(testNull1));
+
+        var testNull11 = null;
+        console.log(testNull11, 'isNull', _.isNull(testNull11)
+            , 'isNullOrEmpty', _.isNullOrEmpty(testNull11)
+            , 'isNullOrWhiteSpace', _.isNullOrWhiteSpace(testNull11));
+
+        var testNull2 = '';
+        console.log(testNull2, 'isNull', _.isNull(testNull2)
+            , 'isNullOrEmpty', _.isNullOrEmpty(testNull2)
+            , 'isNullOrWhiteSpace', _.isNullOrWhiteSpace(testNull2));
+
+        var testNull3 = '  \r\n';
+        console.log(testNull3, 'isNull', _.isNull(testNull3)
+            , 'isNullOrEmpty', _.isNullOrEmpty(testNull3)
+            , 'isNullOrWhiteSpace', _.isNullOrWhiteSpace(testNull3));
+
+        var testNull4 = 'test';
+        console.log(testNull4, 'isNull', _.isNull(testNull4)
+            , 'isNullOrEmpty', _.isNullOrEmpty(testNull4)
+            , 'isNullOrWhiteSpace', _.isNullOrWhiteSpace(testNull4));
+
+        var testNull5 = [];
+        console.log(testNull5, 'isNull', _.isNull(testNull5)
+            , 'isNullOrEmpty', _.isNullOrEmpty(testNull5)
+            , 'isNullOrWhiteSpace', _.isNullOrWhiteSpace(testNull5));
+    });
+</script>

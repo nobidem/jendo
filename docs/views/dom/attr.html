@@ -1,0 +1,43 @@
+﻿<h3>.attr( attribute )</h3>
+<div class="example-container">
+    <input id="ex1_check_1" type="checkbox" checked="checked">
+    <br />
+    <div id="ex1_div_1" title="Hi Jendo">example 1</div>
+</div>
+<h3>.attr( attribute, value )</h3>
+<div class="example-container">
+    <ul id="ex2_ul_1">
+        <li>item 1</li>
+        <li>item 2</li>
+        <li>item 3</li>
+    </ul>
+</div>
+<h3>.attr( { attribute:value, attribute:value, ... } )</h3>
+<div class="example-container">
+    <div class="example3">example 3a</div>
+    <div class="example3">example 3b</div>
+</div>
+<h3>.attr(attribute, function(index, currentvalue) )</h3>
+<div class="example-container">
+    <div class="example4" title='Hi "1 '>example 4a</div>
+    <div class="example4">example 4b</div>
+</div>
+<script>
+    _.ready(function () {
+        console.log('.attr("checked")', _('#ex1_check_1').attr("checked"));
+        console.log('.attr("title")', _("#ex1_div_1").attr("title"));
+        
+        _("#ex2_ul_1>li").attr('title', 'Hi Jendo');
+        _(".example3").attr({ title: 'Hi Jendo', alt: 'Goodbye' });
+        _(".example4").attr('title', function (i, val) {
+            return val + ' Jendo (' + i + ')';
+        });
+    });
+</script>
+<style>
+    .example-container {
+        display: inline-block;
+        width: 100%;
+        padding-left: 20px;
+    }
+</style>

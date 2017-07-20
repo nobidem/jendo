@@ -1,0 +1,45 @@
+﻿<div class="datepicker-content">
+    <h4>Default functionality</h4>
+    <input type="text" id="jd_date_1" />
+</div>
+<div class="datepicker-content">
+    <h4>Format date</h4>
+    <select id="jd_date_2_format">
+        <option value="MM/dd/yy">Default - MM/dd/yy</option>
+        <option value="yy-MM-dd">ISO 8601 - yy-MM-dd</option>
+        <option value="d M, yy">Short - d M, yy</option>
+        <option value="d MM, yy">Medium - d MM, yy</option>
+        <option value="ddd, d MM, yyyy">Full - dd, d MM, yyyy</option>
+        <option value="M/d/yyyy">M/d/yyyy</option>
+        <option value="dddd, MMMM dd, yyyy">dddd, MMMM dd, yyyy</option>
+        <option value="ddd, MMM d, yy">ddd, MMM d, yy</option>
+    </select>
+    <input type="text" id="jd_date_2" style="width:300px" />
+</div>
+<style>
+    body {
+        background-color: #E9E9E9;
+    }
+
+    .datepicker-content {
+        width: 100%;
+        border-bottom: 1px solid black;
+        padding: 15px;
+    }
+</style>
+<script>
+    _.ready(function () {
+        // Default functionality
+        _.datepicker('#jd_date_1');
+
+        // Format date
+        _.datepicker('#jd_date_2')
+            .format('dd.MM.yyyy');
+
+
+        _('#jd_date_2_format').on('change', function (e) {
+            var dateFormat = _(e.target).val();
+            _.datepicker('#jd_date_2').format(dateFormat);
+        });
+    });
+</script>

@@ -1,0 +1,43 @@
+﻿<h3>.html()</h3>
+<div class="example-container">
+    <p class="example1">
+        <b>Click</b> to change the <span id="tag">html</span>
+    </p>
+    <p class="example1">
+        to a <span id="text">text</span> node.
+    </p>
+    <p class="example1">
+        This <button name="nada">button</button> does nothing.
+    </p>
+</div>
+<h3>.html( htmlString )</h3>
+<div class="example-container">
+    <div class="example2">Demonstration Box 1</div>
+    <div class="example2">Demonstration Box 2</div>
+</div>
+<h3>.html( function )</h3>
+<div class="example-container">
+    <p class="example3">All new content. <em>You bet!</em></p>
+    <p class="example3">All new content. <em>You bet!</em></p>
+</div>
+<script>
+    _.ready(function () {
+        console.log(_("p.example1").html(), 'length:' + _("p.example1").length);
+
+        _("div.example2").html('<p>All new content. <em>You bet!</em></p>');
+
+        _('p.example3').html(function (i, item) {
+            console.log('p.example3', i, item);
+            var emphasis = "<em>" + i + " / " + _("p").length + " paragraphs!</em>";
+            return "<p>All new content for " + emphasis + "</p>";
+        });
+    });
+</script>
+<style>
+    .example-container
+    {
+        display: inline-block;
+        width: 100%;
+        padding-left: 20px;
+    }
+</style>

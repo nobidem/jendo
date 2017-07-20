@@ -1,0 +1,32 @@
+﻿<h3>.isEqual( selector )</h3>
+<div class="example-container">
+    <div class="example1">
+        <div>This is the first element.</div>
+        <div>This is the second element.</div>
+        <div>This is the first element.</div>
+    </div>
+</div>
+<script>
+    _.ready(function () {
+        
+        _(".example1>div").isEqual(function (i, item) {
+            console.log('function', i, item);
+            return (i == 1);
+        });
+        
+
+        var divList = _(".example1>div");
+        var div0 = divList.item(0);        
+        console.log("div 0 equals div 0: " + div0.isEqual(divList.items[0]));
+        console.log("div 0 equals div 1: " + div0.isEqual(divList.items[1]));
+        console.log("div 0 equals div 2: " + div0.isEqual(divList.items[2]));
+    });
+</script>
+<style>
+    .example-container {
+        display: inline-block;
+        width: 100%;
+        padding-left: 20px;
+    }
+  
+</style>

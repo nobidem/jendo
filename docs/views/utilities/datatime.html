@@ -1,0 +1,16 @@
+﻿<div>
+    DateTime
+</div>
+<script>
+    _.ready(function () {
+        console.log('daysInMonth', jendo.daysInMonth(2, 2017));
+        
+        var test1Date = new Date(2007, 2, 9, 11, 23, 38, 456);
+        var test2Date = new Date(2017, 2, 9, 19, 3, 4, 123);
+        
+        console.log('dateFormat', jendo.dateFormat(test1Date, 'yyyy-MM-dd HH:mm:ss.fff zzz'));
+        console.log('dateFormat', jendo.dateFormat(test1Date, 'yy-M-d hh:m:s.ff tt'));
+        console.log('dateFormat', jendo.dateFormat(test2Date, 'yyyy-MM-dd H:mm:ss.ff tt'));
+        console.log('dateFormat', jendo.dateFormat(test2Date, 'yy-M-d h:m:s.f zzz'));
+    });
+</script>

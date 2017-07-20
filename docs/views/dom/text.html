@@ -1,0 +1,42 @@
+﻿<h3>.text()</h3>
+<div class="example-container">
+    <p class="example1">
+        <b>Test</b> Paragraph 1.
+    </p>
+    <p class="example1">
+        <b>Test</b> Paragraph 2.
+    </p>
+    <p class="example1">
+        <b>Test</b> Paragraph 3.
+    </p>
+</div>
+<h3>.text( text )</h3>
+<div class="example-container">
+    <div class="example2">Demonstration Box 1</div>
+    <div class="example2">Demonstration Box 2</div>
+</div>
+<h3>.text( function )</h3>
+<div class="example-container">
+    <p class="example3">All new content. <em>You bet!</em></p>
+    <p class="example3">All new content. <em>You bet!</em></p>
+</div>
+<script>
+    _.ready(function () {
+        console.log(_("p.example1").text(), 'length:' + _("p.example1").length);
+
+        _("div.example2").text('<p>All new content. <em>You bet!</em></p>');
+
+        _('p.example3').text(function (i, item) {
+            console.log('p.example3', i, item);
+            var emphasis = "<em>" + i + " / " + _("p").length + " paragraphs!</em>";
+            return "<p>All new content for " + emphasis + "</p>";
+        });
+    });
+</script>
+<style>
+    .example-container {
+        display: inline-block;
+        width: 100%;
+        padding-left: 20px;
+    }
+</style>

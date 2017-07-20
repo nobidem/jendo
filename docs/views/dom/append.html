@@ -1,0 +1,87 @@
+﻿<h3>.append( content [, content ] )</h3>
+
+<h3>.append( string )</h3>
+<div class="example-container">
+    <div class="ex1-inner">Hello</div>
+    <div class="ex1-inner">Goodbye</div>
+</div>
+<h3>.append( element )</h3>
+<div class="example-container">
+    <div id="example2_1" class="ex2-container">
+        element 2.1.
+        <div>item 1</div>
+        <div>item 2</div>
+    </div>
+    <div id="example2_2" class="ex2-container">
+        element 2.2.
+    </div>
+</div>
+
+<h3>.append( element img )</h3>
+<div class="example-container">
+    <div id="example3_1"></div>
+    <div id="example3_2"></div>
+</div>
+
+<h3>.append( element ul )</h3>
+<div class="example-container">
+    <div id="example4_1" class="example4"></div>
+    <div id="example4_2" class="example4"></div>
+</div>
+<script>
+    _.ready(function () {
+        // example 1
+        var ex1_1 = _(".ex1-inner").append("<span>Test 1</span>");
+        // console.log('example 1', ex1_1); 
+        // console.log('example 1: children', ex1_1.children());
+        // console.log('example 1: children.last', ex1_1.children().last());
+        // console.log('example 1: lastChild', ex1_1.lastChild());
+        var ex1_2 = _(".ex1-inner").append("Test 2");
+        // console.log('example 1', ex1_2);
+        _(".ex1-inner").append(_.createElementSpan().text("Test 3"));
+
+        // example 2
+        // създава нов елемент
+        var ex2_div = _.createElementDiv().style("border: 1px solid red;");
+        var ex2_ch = _("#example2_1").children();
+        // console.log('example 2: div', ex2_div, ex2_ch);
+        // Преместв елементите
+        ex2_div.append(ex2_ch);
+        // console.log('example 2: div', ex2_div);
+        // Добавя елемента
+        _("#example2_2").append(ex2_div);
+
+        // example 3
+        _("#example3_1").html('<img src="http://www.bikez.com/pictures/um/2007/24797_0_1_2_dsf-200_Image%20credits%20-%20UM.jpg"/>');
+        _("#example3_1").appendElementImg('http://www.bikez.com/pictures/um/2007/24797_0_1_2_dsf-200_Image%20credits%20-%20UM.jpg');
+        
+        // example 4
+        var ex4UL = _(".example4").appendElementUL();
+        // console.log('example 4: UL', ex4UL);
+        ex4UL.appendElementLI().appendElementA('#', 'test 1');
+        ex4UL.appendElementLI().appendElementA('#', 'test 2');
+        ex4UL.appendElementLI().appendElementA('#', 'test 3');
+    });
+</script>
+<style>
+    .example-container {
+        display: inline-block;
+        width: 100%;
+        padding-left: 20px;
+    }
+
+    .ex1-inner {
+        display: inline-block;
+        width: 100%;
+    }
+        .ex1-inner span {
+            padding: 0px 10px;
+        }
+
+    .ex2-container {
+        border: 1px solid blue;
+        min-height:20px;
+        margin-bottom:5px;
+    }
+
+</style>

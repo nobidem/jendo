@@ -1,0 +1,93 @@
+﻿<h3>.remove( [selector ] )</h3>
+
+<h3>.remove()</h3>
+<div class="example-container">
+    <div id="example1_1" class="ex1-container">
+        This is some text in the div.
+        <p>This is a paragraph in the div.</p>
+        <p>This is another paragraph in the div.</p>
+    </div>
+    <br>
+    <button id="example1_2">Remove div element</button>
+</div>
+<h3>.remove( element )</h3>
+<div class="example-container">
+    <div id="example2_1" class="ex2-container">
+        <p>This is a paragraph.</p>
+        <p class="test">This is another paragraph.</p>
+        <p class="test">This is another paragraph.</p>
+        <p class="demo">This is p element with class="demo".</p>
+    </div>
+    <button id="example2_2">Remove all p elements with class="test" and class="demo"</button>
+</div>
+
+<h3>.empty()</h3>
+<div class="example-container">
+    <div id="example3_1" class="ex3-container">
+        This is some text in the div.
+        <p>This is a paragraph in the div.</p>
+        <p>This is another paragraph in the div.</p>
+    </div>
+    <br>
+    <button id="example3_2">Empty the div element</button>
+</div>
+
+<script>
+    _.ready(function () {
+        // example 1
+        _("#example1_2").click(function () {
+            var ex1 = _("#example1_1");
+            ex1.remove();
+            console.log(ex1);
+        });
+        // example 2
+        _("#example2_2").click(function () {
+            var ex2 = _("#example2_1").find("p");
+            ex2.remove(".test, .demo");
+            console.log(ex2);
+        });
+        // example 3
+        _("#example3_2").click(function () {
+            var ex3 = _("#example3_1");
+            ex3.empty();
+            console.log(ex3);
+        });
+    });
+</script>
+<style>
+    .example-container {
+        display: inline-block;
+        width: 100%;
+        padding-left: 20px;
+    }
+
+    .ex1-container {
+        height: 100px;
+        width: 300px;
+        border: 1px solid black;
+        background-color: yellow;
+    }
+
+    .ex2-container {
+        width: 300px;
+        border: 1px solid black;
+        background-color: yellow;
+    }
+
+        .ex2-container .test {
+            color: red;
+            font-size: 20px;
+        }
+
+        .ex2-container .demo {
+            color: green;
+            font-size: 25px;
+        }
+
+    .ex3-container {
+        height: 100px;
+        width: 300px;
+        border: 1px solid black;
+        background-color: yellow;
+    }
+</style>

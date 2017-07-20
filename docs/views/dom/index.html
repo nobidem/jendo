@@ -1,0 +1,78 @@
+﻿<div id="postContent" class="gt-content"></div>
+<script>
+    var jsonContent = [{
+        title: '.append()',
+        link: _.route.pageLink('/dom/append'),
+        text: 'Постава елемент в края на всеки от избрания списък',
+        meta: ''
+    }, {
+        title: '.appendTo()',
+        link: '/dom/appendto',
+        text: '',
+        meta: ''
+    }, {
+        title: '.remove()',
+        link: _.route.pageLink('/dom/remove'),
+        text: 'Премахва елементи от избраните',
+        meta: ''
+    }, {
+        title: '.html()',
+        link: _.route.pageLink('/dom/html'),
+        text: 'Взема HTML съдържанието на първия елемент от съвпадащите елементи или задава HTML съдържание на всеки от съвпадащите елементи.',
+        meta: ''
+    }, {
+        title: '.prepend()',
+        link: '/dom/prepend',
+        text: '',
+        meta: ''
+    }, {
+        title: '.prependTo()',
+        link: '/dom/prependto',
+        text: '',
+        meta: ''
+    }, {
+        title: '.text()',
+        link: _.route.pageLink('/dom/text'),
+        text: 'Взема комбинираното текстово съдържание на всеки съвпадащи елементи, включително техните потомци или задава текство съдържание на съвпадащи елементи.',
+        meta: ''
+    }, {
+        title: 'Elements',
+        link: _.route.pageLink('/dom/elements'),
+        text: '',
+        meta: ''
+    }, {
+        title: '.val()',
+        link: _.route.pageLink('/dom/val'),
+        text: 'Взема стойността на първия елемент от съвпадащите елементи или задава стойността на всеки от съвпадащите елементи.',
+        meta: ''
+    }, {
+        title: '.attr()',
+        link: _.route.pageLink('/dom/attr'),
+        text: 'Взема стойността на атрибута на първия елемент от съвпадащите елементи или задава стойност на атрибута на всеки съвпадащи елементи.',
+        meta: ''
+    }, {
+        title: '.removeAttr()',
+        link: _.route.pageLink('/dom/removeAttr'),
+        text: 'Премахва атрибута от всички съвпадащи елементи.',
+        meta: ''
+    }, {
+        title: '.prop()',
+        link: _.route.pageLink('/dom/prop'),
+        text: 'Взема стойността на property на първия елемент от съвпадащите елементи или задава стойност на property на всеки съвпадащи елементи.',
+        meta: ''
+    }, {
+        title: '.removeProp()',
+        link: _.route.pageLink('/dom/removeProp'),
+        text: 'Премахва property от всички съвпадащи елементи.',
+        meta: ''
+    }, {
+        title: '.css()',
+        link: _.route.pageLink('/dom/css'),
+        text: 'Вземете стойността на property на стила на първия елемент от списъка с елементи или задава стойност на CSS property на един или повече елементи от списъка.',
+        meta: ''
+    }];
+
+    _.ready(function () {
+        _.section('#postContent').load(jsonContent);
+    });
+</script>

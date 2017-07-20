@@ -1,0 +1,40 @@
+﻿<h3>.focus() .blur()</h3>
+<h3>.focus( handler, [data]) .blur( handler, [data])</h3>
+<div class="example-container">
+    <div class="example1">
+        <input id="ex1_target" type="text" value="Field 1">
+    </div>
+    <h3>Example 2</h3>
+    <div class="example2">
+        Enter your name: <input type="text" id="ex2_input" />
+        <br><br>
+        <button id="ex2_btn1">Trigger focus event</button>
+        <button id="ex2_btn2">Trigger blur event</button>
+        <p style="color:red" id="ex2_p"></p>
+    </div>
+</div>
+<script>
+    _.ready(function () {
+        _("#ex1_target").focus(function (e) {
+            console.log("Handler for .focus() called.", e);
+        }, { value: 123 });
+
+        _("#ex2_btn1").click(function (e) {
+            _("#ex2_input").focus();
+            _("#ex2_p").html("focus event triggered");
+            console.log(e.data);
+        }, { value: 'button 1' });
+        _("#ex2_btn2").click(function (e) {
+            _("#ex2_input").blur();
+            _("#ex2_p").html("blur event triggered");
+            console.log(e.data);
+        }, { value: 'button 2' });
+    });
+</script>
+<style>
+    .example-container {
+        display: inline-block;
+        width: 100%;
+        padding-left: 20px;
+    }
+</style>

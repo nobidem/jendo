@@ -1,0 +1,20 @@
+﻿<h3>.removeProp( property )</h3>
+<div class="example-container">
+    <p class="example1" style="font-size:120%;color:red">This is a paragraph.</p>
+    <p class="example1" style="font-weight:bold;color:blue">This is another paragraph.</p>
+</div>
+<script>
+    _.ready(function () {
+        _('.example1').prop("luggageCode", 1234);
+        console.log(_('.example1').prop("luggageCode"));
+        _('.example1').removeProp("luggageCode");
+        console.log(_('.example1').prop("luggageCode"));
+    });
+</script>
+<style>
+    .example-container {
+        display: inline-block;
+        width: 100%;
+        padding-left: 20px;
+    }
+</style>

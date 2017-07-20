@@ -1,0 +1,94 @@
+﻿<h3>.is( selector )</h3>
+<div class="example-container">
+    <div class="example1">
+        <div></div>
+        <div class="blue"></div>
+        <div></div>
+        <div class="red"></div>
+        <div data-name="Peter"><br /><span>Peter</span></div>
+        <div class="blue"></div>
+        <p>&nbsp;</p>
+    </div>
+    <div class="example2">
+        <div>This is the first element.</div>
+        <div>This is the second element.</div>
+        <div>This is the first element.</div>
+    </div>
+</div>
+<script>
+    _.ready(function () {
+        console.log('is null', _(".example1").is());
+
+        _(".example1>div").is(function (i, item) {
+            console.log('function', i, item);
+            return (i == 3);
+        });
+
+        _(".example1>div").click(function () {
+            if (_(this).is(".example1>:first-child")) {
+                _(".example1>p").text("It's the first div.");
+            } else if (_(this).is(".example1>.blue,.red")) {
+                _(".example1>p").text("It's a blue or red div.");
+                // } else if (_(this).is(".example1>:contains('Peter')")) {
+            } else if (_(this).is(".example1>[data-name='Peter']")) {
+                _(".example1>p").text("It's Peter!");
+            } else {
+                _(".example1>p").html("It's nothing <em>special</em>.");
+            }
+            // $(".example1>p").hide().slideDown("slow");
+            
+            _(this).css({
+                "border-style": "inset",
+                cursor: "default"
+            });
+        });
+
+        var divList = _(".example2>div");
+        var div0 = divList.item(0);
+        console.log("div 0 equals div 0: " + div0.is(divList.items[0]));
+        console.log("div 0 equals div 1: " + div0.is(divList.items[1]));
+        console.log("div 0 equals div 2: " + div0.is(divList.items[2]));
+    });
+</script>
+<style>
+    .example-container {
+        display: inline-block;
+        width: 100%;
+        padding-left: 20px;
+    }
+    /* example1
+    */
+    .example1 div {
+        width: 60px;
+        height: 60px;
+        margin: 5px;
+        float: left;
+        border: 4px outset;
+        background: green;
+        text-align: center;
+        font-weight: bolder;
+        cursor: pointer;
+    }
+
+    .example1 .blue {
+        background: blue;
+    }
+
+    .example1 .red {
+        background: red;
+    }
+
+    .example1 span {
+        color: white;
+        font-size: 16px;
+    }
+
+    .example1 p {
+        color: red;
+        font-weight: bolder;
+        background: yellow;
+        margin: 3px;
+        clear: left;
+        /* display: none; */
+    }
+</style>

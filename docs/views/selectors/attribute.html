@@ -1,0 +1,46 @@
+﻿<h3>_('span[lang]').style('font-weight:bold');</h3>
+<h3>_('span[lang="pt"]').style('color:green');</h3>
+<h3>_('span[lang~="en-us"]').style('color: blue');</h3>
+<h3>_('span[lang|="zh"]').style('color: red');</h3>
+<h3>_('a[href^="#"]').style('background-color: gold');</h3>
+<h3>_('span[class^="main"]').style('background-color: yellow');</h3>
+<h3>_('a[href$=".cn"]').style('color: red');</h3>
+<h3>_('a[href*="example"]').style('background-color: #CCCCCC');</h3>
+<h3>_('input[type="email" i]').style('border-color: blue');</h3>
+<div class="hello-example">
+    <a href="http://example.com">English:</a>
+    <span lang="en-us en-gb en-au en-nz">Hello World!</span>
+</div>
+<div class="hello-example">
+    <a href="#portuguese">Portuguese:</a>
+    <span lang="pt">Olá Mundo!</span>
+</div>
+<div class="hello-example">
+    <a href="http://example.cn">Chinese (Simplified):</a>
+    <span lang="zh-CN">世界您好！</span>
+</div>
+<div class="hello-example">
+    <a href="http://example.cn">Chinese (Traditional):</a>
+    <span lang="zh-TW">世界您好！</span>
+</div> 
+<script>
+    _.ready(function () {
+        _('span[lang]').style('font-weight:bold');
+
+        _('span[lang="pt"]').style('color:green');
+
+        _('span[lang~="en-us"]').style('color: blue');
+
+        _('span[lang|="zh"]').style('color: red');
+
+        _('a[href^="#"]').style('background-color: gold');
+
+        _('span[class^="main"]').style('background-color: yellow');
+
+        _('a[href$=".cn"]').style('color: red');
+
+        _('a[href*="example"]').style('background-color: #CCCCCC');
+
+        _('input[type="email"]').style('border-color: blue');
+    });
+</script>

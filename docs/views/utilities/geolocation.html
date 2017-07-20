@@ -1,0 +1,53 @@
+﻿<h3>
+</h3>
+<div>
+    <button type="button" onclick="clickGet()">get</button>
+    <button type="button" onclick="clickWatch()">watch</button>
+    <button type="button" onclick="clickClear()">clear</button>
+</div>
+<script>
+    function clickGet() {
+        var options = {
+            enableHighAccuracy: true,
+            timeout: 5000,
+            maximumAge: 0
+        };
+        _.geolocation(options).get(
+            function (position) {
+                console.log('get', position);
+            },
+            function (error) {
+                console.log('get', error);
+            }
+        );
+    }
+
+    var watchId = -1;
+    function clickWatch() {
+        if (watchId == -1) {
+            var options = {
+                enableHighAccuracy: false,
+                timeout: 5000,
+                maximumAge: 0
+            };
+            watchId = _.geolocation(options).watch(
+                function (position) {
+                    console.log('watch', position);
+                },
+                function (error) {
+                    console.log('watch', error);
+                }
+            );
+            console.log(watchId);
+        }
+    }
+
+    function clickClear() {
+        // console.log(watchId);
+        if (watchId > -1) {
+            console.log(watchId);
+            _.geolocation().clear(watchId);
+            watchId = -1;
+        }
+    }
+</script>

@@ -1,0 +1,15 @@
+﻿<h3>_('div > span').style('background-color: DodgerBlue');</h3>
+<div>
+    <p>
+      <span>Span 1. In the div.
+        <span>Span 2. In the span that's in the div.</span>
+      </span>
+    </p>
+    <span>Span 3. Not in a div at all.</span>
+</div>
+<script>
+    _.ready(function () {
+        _('span').style('background-color: white');
+        _('p > span').style('background-color: DodgerBlue');
+    });
+</script>

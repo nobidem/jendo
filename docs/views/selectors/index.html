@@ -1,0 +1,53 @@
+﻿<div id="postContent" class="gt-content"></div>
+<script>
+    var jsonContent = [{
+        title: 'Type selectors ("element")',
+        link: _.route.pageLink('/selectors/type'),
+        text: 'Избира всички елементи с даденото име',
+        meta: ''
+    }, {
+        title: 'ID selectors ("#id")',
+        link: _.route.pageLink('/selectors/id'),
+        text: 'Избира елемента с даденото id',
+        meta: ''
+    }, {
+        title: 'Class selectors (".class")',
+        link: _.route.pageLink('/selectors/class'),
+        text: 'Избира всички елементи с дадения class',
+        meta: ''
+    }, {
+        title: 'Universal selectors ("*")',
+        link: _.route.pageLink('/selectors/universal'),
+        text: 'Избира всички елементи',
+        meta: ''
+    }, {
+        title: 'Attribute selectors ("attr")',
+        link: _.route.pageLink('/selectors/attribute'),
+        text: 'Избира елементи на база атрибут',
+        meta: ''
+    }, {
+        title: 'Adjacent sibling selectors ("A + B")',
+        link: _.route.pageLink('/selectors/adjacent_sibling'),
+        text: 'Комбинация \'+\' избира възли, които веднага следват първия посочен',
+        meta: ''
+    }, {
+        title: 'General sibling selectors ("A ~ B")',
+        link: _.route.pageLink('/selectors/general_sibling'),
+        text: 'Комбинация \'~\' избира възли, които следват (не е задължително веднага) първия посочен елемент, ако и двата елемента споделят един и същ родител.',
+        meta: ''
+    }, {
+        title: 'Child selectors ("A > B")',
+        link: _.route.pageLink('/selectors/child'),
+        text: 'Комбинация \'>\' избира възли, които са преки деца на първия посочен елемент.',
+        meta: ''
+    }, {
+        title: 'Descendant selectors ("A B")',
+        link: _.route.pageLink('/selectors/descendant'),
+        text: 'Комбинация \' \' избира възли, които са деца (не е необходимо директни деца) на първия посочен елемент.',
+        meta: ''
+    }];
+
+    _.ready(function () {
+        _.section('#postContent').load(jsonContent);
+    });
+</script>

@@ -1,0 +1,127 @@
+﻿<p>
+    <button type="button" onclick="sortDataGrid()">Sort By: "fname", "lname"</button>
+    <button type="button" onclick="dataGridRefresh()">Refresh</button>
+</p>
+<div id="grid1" class="jd-grid"></div>
+<script>
+    function sortDataGrid() {
+        // console.log(dataGrid.records);
+
+        _.gridView('#grid1')
+            .sortData([{ field: 'lname', sort: 1 }, { field: 'fname', sort: -1 }]);
+    }
+
+    function dataGridRefresh() {
+        _.gridView('#grid1').refresh();
+    }
+</script>
+<script>
+    var dataGrid = {
+        name: 'grid',
+        header: 'List of Names',
+        allowPaging: true,
+        pageSize: 15,           /* редове на страница */
+        pager: {
+            numeric: true,      /* бутони с номера на страници */
+            numericCount: 5,    /* брой на видимите бутони с номера на страници */
+            nextPrev: true,     /* бутони: следваща, предишена страница */
+            firstLast: true,    /* бутони: първа, последна страница */
+            slider: true,       /* слаидер за навигация */
+            goToPage: true,     /* директно позициониране на страница */
+            pageSize: true,     /* брой редове на страница */
+            info: true          /* информация за позицията */
+        },
+        show: {
+            toolbar: true,
+            footer: true,
+            rowNo: true         /* номер на ред */
+        },
+        // филтриране (за целия грид)
+        filterable: {
+            enabled: true,      /* може ли за се филтрира */
+            mode: 'row'         /* стил на филтъра 'row', 'menu' */
+        },
+        columns: [
+            {
+                field: 'recid',
+                caption: 'ID',
+                size: '50px',
+                sortable: true,
+                attr: 'align=center',
+                filterable: {           // филтриране (за колонката)
+                    enabled: false      // може ли за се филтрира
+                }
+            },
+            { field: 'lname', caption: 'Last Name', size: '30%', sortable: true, resizable: true },
+            { field: 'fname', caption: 'First Name', size: '30%', sortable: true, resizable: true },
+            { field: 'email', caption: 'Email', size: '40%', resizable: true },
+            {
+                field: 'sdate',
+                caption: 'Start Date',
+                size: '120px',
+                resizable: true
+            }, {
+                commands: [{
+                    caption: 'edit',
+                    click: function (source, e) {
+                        console.log('click edit', e);
+                    },
+                    fields: ['lname', 'fname']
+                }, {
+                    caption: 'delete',
+                    click: function (source, e) {
+                        console.log('click delete', e);
+                    }
+                }],
+                caption: 'Команди'
+            }
+        ],
+        searches: [
+            { field: 'lname', caption: 'Last Name', type: 'text' },
+            { field: 'fname', caption: 'First Name', type: 'text' },
+            { field: 'email', caption: 'Email', type: 'text' },
+        ],
+        sortData: [{ field: 'recid', direction: 'ASC' }],
+        records: [
+            { recid: 1, fname: 'John', lname: 'doe', email: 'jdoe@gmail.com', sdate: '4/3/2012' },
+            { recid: 2, fname: 'Stuart', lname: 'Motzart', email: 'jdoe@gmail.com', sdate: '4/3/2012' },
+            { recid: 3, fname: 'Jin', lname: 'Franson', email: 'jdoe@gmail.com', sdate: '4/3/2012' },
+            { recid: 4, fname: 'Susan', lname: 'Ottie', email: 'jdoe@gmail.com', sdate: '4/3/2012' },
+            { recid: 5, fname: 'Kelly', lname: 'Silver', email: 'jdoe@gmail.com', sdate: '4/3/2012' },
+            { recid: 6, fname: 'Francis', lname: 'Gatos', email: 'jdoe@gmail.com', sdate: '4/3/2012' },
+            { recid: 7, fname: 'Mark', lname: 'Welldo', email: 'jdoe@gmail.com', sdate: '4/3/2012' },
+            { recid: 8, fname: 'Thomas', lname: 'Bahh', email: 'jdoe@gmail.com', sdate: '4/3/2012' },
+            { recid: 9, fname: 'Sergei', lname: 'Rachmaninov', email: 'jdoe@gmail.com', sdate: '4/3/2012' },
+            { recid: 20, fname: 'Jill', lname: 'Doe', email: 'jdoe@gmail.com', sdate: '4/3/2012' },
+            { recid: 21, fname: 'Frank', lname: 'Motzart', email: 'jdoe@gmail.com', sdate: '4/3/2012' },
+            { recid: 22, fname: 'Peter', lname: 'Franson', email: 'jdoe@gmail.com', sdate: '4/3/2012' },
+            { recid: 23, fname: 'Andrew', lname: 'Ottie', email: 'jdoe@gmail.com', sdate: '4/3/2012' },
+            { recid: 24, fname: 'Manny', lname: 'Silver', email: 'jdoe@gmail.com', sdate: '4/3/2012' },
+            { recid: 25, fname: 'Ben', lname: 'Gatos', email: 'jdoe@gmail.com', sdate: '4/3/2012' },
+            { recid: 26, fname: 'Doer', lname: 'Welldo', email: 'jdoe@gmail.com', sdate: '4/3/2012' },
+            { recid: 27, fname: 'Shashi', lname: 'bahh', email: 'jdoe@gmail.com', sdate: '4/3/2012' },
+            { recid: 28, fname: 'Av', lname: 'Rachmaninov', email: 'jdoe@gmail.com', sdate: '4/3/2012' }
+        ]
+    };
+
+    _.ready(function () {
+        _.gridView('#grid1').data(dataGrid);
+        /*
+        var fRec = dataGrid.records.filterBy([
+                // { field: 'recid', filter: 2 },
+                { field: 'lname', filter: 'o' },
+                { field: 'fname', filter: 'a' }]);
+
+        console.log('filterBy', dataGrid.records.length, fRec.length, fRec);
+        */
+
+        /*
+        console.log(
+        dataGrid.records.filter(function (item, i, source) {
+            console.log(item);
+            return true;
+        }));
+        */
+    });
+    
+</script>

@@ -1,0 +1,25 @@
+﻿<h3>_('div > span').style('background-color: DodgerBlue');</h3>
+<div>
+    <ul>
+        <li>
+            <div>Item 1</div>
+            <ul>
+                <li>Subitem A</li>
+                <li>Subitem B</li>
+            </ul>
+        </li>
+        <li>
+            <div>Item 2</div>
+            <ul>
+                <li>Subitem A</li>
+                <li>Subitem B</li>
+            </ul>
+        </li>
+    </ul>
+</div>
+<script>
+    _.ready(function () {
+        _('li').style('list-style-type: disc');
+        _('li li').style('list-style-type: circle');
+    });
+</script>

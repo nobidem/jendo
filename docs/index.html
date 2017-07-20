@@ -1,10 +1,32 @@
-<!DOCTYPE html>
-<html>
+﻿<!DOCTYPE html>
+<html lang="bg">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8" />
+    <meta content="width=device-width,initial-scale=1" name="viewport" />
+    <meta content="IE=edge" http-equiv="X-UA-Compatible" />
     <title>Jendo</title>
+    <link rel="stylesheet" href="/content/jendo-ui.css" />
+    <link rel="stylesheet" href="/content/font-awesome/css/font-awesome.min.css" />
+    <script src="/scripts/jendo.js"></script>
+    <script src="/scripts/jendo-route.js"></script>
+    <script src="/scripts/jendo-ui.js"></script>
+    <script src="/scripts/script.js"></script>
 </head>
 <body>
-    Jendo ...
+    <div id="navBarContent" class="jd-navbar jd-navbar-default"></div>
+    <div id="result"></div>
+    <script>
+        _.ready(function () {
+            _.navbar('#navBarContent').load(jsonNavBar);
+
+            // RouteTable
+            _.route.mapRoute({
+                url: "{controller}/{action}/{id}",
+                defaults: { controller: "home", action: "index", id: null }
+            });
+            _.route.init();
+            _.route.renderBody("#result");
+        });
+    </script>
 </body>
-</html> 
+</html>

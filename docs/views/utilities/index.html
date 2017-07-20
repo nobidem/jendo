@@ -1,0 +1,38 @@
+﻿<div id="postContent" class="gt-content"></div>
+<script>
+    var jsonContent = [{
+        title: 'geolocation',
+        link: _.route.pageLink('/utilities/geolocation'),
+        text: '',
+        meta: ''
+    }, {
+        title: 'qrcode',
+        link: _.route.pageLink('/utilities/qrcode'),
+        text: '',
+        meta: ''
+    }, {
+        title: 'function',
+        link: _.route.pageLink('/utilities/fun'),
+        text: '',
+        meta: ''
+    }, {
+        title: 'sortBy',
+        link: _.route.pageLink('/utilities/sortBy'),
+        text: '',
+        meta: ''
+    }, {
+        title: 'lang',
+        link: _.route.pageLink('/utilities/lang'),
+        text: '',
+        meta: ''
+    }, {
+        title: 'datatime',
+        link: _.route.pageLink('/utilities/datatime'),
+        text: '',
+        meta: ''
+    }];
+
+    _.ready(function () {
+        _.section('#postContent').load(jsonContent);
+    });
+</script>

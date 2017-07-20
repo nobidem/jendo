@@ -1,0 +1,16 @@
+﻿<h3>_('li:first-of-type + li').style('color:red');</h3>
+<h3>_('img + span.caption').style('font-style: italic');</h3>
+<ul>
+  <li>One</li>
+  <li>Two</li>
+  <li>Three</li>
+</ul>
+<img src="photo1.jpg"><span class="caption">The first photo</span>
+<img src="photo2.jpg"><span class="caption">The second photo</span>
+<script>
+    _.ready(function () {
+        _('li:first-of-type + li').style('color:red');
+
+        _('img + span.caption').style('font-style: italic');
+    });
+</script>

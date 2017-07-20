@@ -1,0 +1,13 @@
+﻿<div id="postContent" class="gt-content"></div>
+<script>
+    var jsonContent = [{
+        title: '.focus()',
+        link: _.route.pageLink('/events/focus'),
+        text: 'Получава събитието "focus" или задействайте това събитие върху елемент.',
+        meta: ''
+    }];
+
+    _.ready(function () {
+        _.section('#postContent').load(jsonContent);
+    });
+</script>

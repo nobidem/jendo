@@ -1,0 +1,49 @@
+﻿<div style="padding: 15px;">
+    <div style="border: 1px solid red;">
+        <button type="button" class="jd-bnt">Default j</button>
+        <input type="button" value="Default" class="jd-bnt jd-bnt-default" />
+        <button type="button" class="jd-bnt jd-bnt-default">Default Button</button>
+        <button type="button" class="default_button">Default Button d</button>
+        <a href="#" class="jd-bnt jd-bnt-default">Default Link</a>
+        <a href="#" class="default_link">Default Link d</a>
+    </div>
+</div>
+
+<script>
+    _.ready(function () {
+        runExample('#example1');
+        runExample('#example2');
+    });
+
+    function runExample(example) {
+        var result = _(example + '_result');
+        result.html('');
+        var codeText = _(example + '_code').val();
+        var codeDoc = _.parseHTML(codeText);
+        result.append(codeDoc);
+    }
+</script>
+<div style="padding: 15px;">
+    <samp>EXAMPLE</samp>
+    <button type="button" onclick="runExample('#example1')">Run</button>
+    <textarea id="example1_code" style="width: 100%;" rows="4">
+&lt;button type="button" class="jd-bnt jd-bnt-default">Button&lt;/button>
+&lt;input type="button" value="Input" class="jd-bnt jd-bnt-default" />
+&lt;a href="#" class="jd-bnt jd-bnt-default">Link&lt;/a>
+    </textarea>
+    <div id="example1_result"></div>
+</div>
+<div style="padding: 15px;">
+    <samp>EXAMPLE</samp>
+    <button type="button" onclick="runExample('#example2')">Run</button>
+    <textarea id="example2_code" style="width: 100%;" rows="8">
+&lt;button type="button" class="jd-bnt jd-bnt-default">Button&lt;/button>
+&lt;button type="button" class="jd-bnt jd-bnt-primary">Button&lt;/button>
+&lt;button type="button" class="jd-bnt jd-bnt-success">Button&lt;/button>
+&lt;button type="button" class="jd-bnt jd-bnt-info">Button&lt;/button>
+&lt;button type="button" class="jd-bnt jd-bnt-warning">Button&lt;/button>
+&lt;button type="button" class="jd-bnt jd-bnt-danger">Button&lt;/button>
+&lt;button type="button" class="jd-bnt jd-bnt-link">Button&lt;/button>
+    </textarea>
+    <div id="example2_result"></div>
+</div>
