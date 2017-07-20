@@ -23,6 +23,9 @@ JendoRoute.prototype.init = function() {
         }
     } else {
         var locationPath = window.location.pathname.trim();
+        if (jendo.startsWith(locationPath, jendo.rootUrl)) {
+            locationPath = locationPath.substring(jendo.rootUrl.length, locationPath.length)
+        }
         if (locationPath.length > 0) {
             if (locationPath[0] == "/") {
                 routeArray = locationPath.substr(1, locationPath.length - 1).split("/")
@@ -102,7 +105,7 @@ JendoRoute.prototype.pageLink = function(value) {
             return value
         }
     } else {
-        return value
+        return jendo.combineUrl(jendo.rootUrl, value)
     }
 };
 jendo.route = new JendoRoute;

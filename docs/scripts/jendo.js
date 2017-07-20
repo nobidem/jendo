@@ -250,12 +250,12 @@ jendo.startsWith = function(valueString, searchString, position) {
     }
 };
 jendo.trimRight = function(valueString, trimString) {
-    for (i = valueString.length - 1; i >= 0; i--) {
+    for (var i = valueString.length - 1; i >= 0; i--) {
         if (trimString != valueString.charAt(i)) {
             return valueString.substring(0, i + 1)
         }
     }
-    return valueString
+    return ""
 };
 jendo.isNull = function(value) {
     if (typeof value == "undefined") {
