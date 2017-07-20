@@ -1,16 +1,16 @@
 ﻿jendo.rootUrl = '/jendo';
 
 var jsonNavBar = [{
-    link: _.route.pageLink('/jendo/?home/index'),
+    link: _.route.pageLink('/home/index'),
     text: 'Home',
 }, {
-    link: _.route.pageLink('/jendo/?traversing'),
+    link: _.route.pageLink('/traversing'),
     text: 'Traversing',
 }, {
-    link: _.route.pageLink('/jendo/?selectors'),
+    link: _.route.pageLink('/selectors'),
     text: 'Selectors',
 }, {
-    link: _.route.pageLink('/jendo/?events'),
+    link: _.route.pageLink('/events'),
     text: 'Events',
 }, {
     text: 'Manipulation',
@@ -21,19 +21,19 @@ var jsonNavBar = [{
 }, {
     text: 'User Interface',
     items: [{
-        link: _.route.pageLink('/jendo/?ui'),
+        link: _.route.pageLink('/ui'),
         text: 'Component',
     }, {
-        link: _.route.pageLink('/jendo/?ui/datepicker'),
+        link: _.route.pageLink('/ui/datepicker'),
         text: 'DatePicker',
     }, {
-        link: _.route.pageLink('/jendo/?ui/grid_view'),
+        link: _.route.pageLink('/ui/grid_view'),
         text: 'Grid View',
     }]
 }, {
-    link: _.route.pageLink('/jendo/?dialog'),
+    link: _.route.pageLink('/dialog'),
     text: 'Dialog'
 }, {
-    link: _.route.pageLink('/jendo/?utilities'),
+    link: _.route.pageLink('/utilities'),
     text: 'Utilities'
 }];
