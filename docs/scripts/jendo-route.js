@@ -12,7 +12,7 @@ function JendoRoute() {
 }
 JendoRoute.prototype.init = function() {
     var routeArray = [];
-    if (jendo.isFileProtocol()) {
+    if (jendo.pageLinkType == 0 && jendo.isFileProtocol() || jendo.pageLinkType == 2) {
         if (window.location.search.length > 0) {
             var urlParams = window.location.search.split("&");
             routeArray = urlParams[0].replace("?", "").split("/")
@@ -76,15 +76,20 @@ JendoRoute.prototype.getViewUrl = function(pageUrl, pageArea) {
     if (jendo.isNullOrWhiteSpace(pageUrl)) {
         var viewUrl = "/views/" + this.data.controller + "/" + this.data.action + ".html";
         var areaUrl = jendo.isNullOrWhiteSpace(this.data.area) ? "" : "/аreas/" + this.data.area;
-        return areaUrl + viewUrl
+        return jendo.rootUrl + areaUrl + viewUrl
     } else {
         var viewUrl = jendo.startsWith(pageUrl, "/") ? "/views" + jendo.trimRight(pageUrl, "/") + ".html" : "/views/" + jendo.trimRight(pageUrl, "/") + ".html";
         var areaUrl = jendo.isNullOrWhiteSpace(pageArea) ? "" : "/аreas/" + pageArea;
-        return areaUrl + viewUrl
+        return jendo.rootUrl + areaUrl + viewUrl
     }
 };
-JendoRoute.prototype.renderBody = function(element, pageUrl) {
-    jendo(element).load(this.getViewUrl(pageUrl), function() {
+JendoRoute.prototype.renderPage = function(element, pageUrl, callback) {
+    var jdElm = jendo(element);
+    jdElm.html("");
+    jdElm.load(this.getViewUrl(pageUrl), function() {
+        if (!jendo.isNull(callback)) {
+            callback()
+        }
         if (typeof jendo.readyFunctions != "undefined") {
             if (typeof jendo.readyFunctionIndex == "undefined") {
                 jendo.readyFunctionIndex = 0
@@ -98,7 +103,7 @@ JendoRoute.prototype.renderBody = function(element, pageUrl) {
     })
 };
 JendoRoute.prototype.pageLink = function(value) {
-    if (jendo.isFileProtocol()) {
+    if (jendo.pageLinkType == 0 && jendo.isFileProtocol() || jendo.pageLinkType == 2) {
         if (!jendo.isNullOrWhiteSpace(value) && value[0] == "/") {
             return "?" + value.substring(1, value.length).replace(/\?/g, "&")
         } else {
@@ -109,6 +114,6 @@ JendoRoute.prototype.pageLink = function(value) {
     }
 };
 jendo.route = new JendoRoute;
-jendo.renderBody = function(element, pageUrl) {
-    jendo.route.renderBody(element, pageUrl)
+jendo.renderPage = function(element, pageUrl, callback) {
+    jendo.route.renderPage(element, pageUrl, callback)
 };

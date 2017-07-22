@@ -1,6 +1,4 @@
-﻿jendo.rootUrl = '/jendo';
-
-var jsonNavBar = [{
+﻿var jsonNavBar = [{
     link: _.route.pageLink('/home/index'),
     text: 'Home',
 }, {

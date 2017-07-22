@@ -8,6 +8,10 @@
     <link rel="stylesheet" href="/jendo/content/jendo-ui.min.css" />
     <link rel="stylesheet" href="/jendo/content/font-awesome/css/font-awesome.min.css" />
     <script src="/jendo/scripts/jendo.min.js"></script>
+	<script>
+        jendo.rootUrl = '/jendo';
+        jendo.pageLinkType = 2;
+    </script>
     <script src="/jendo/scripts/jendo-route.min.js"></script>
     <script src="/jendo/scripts/jendo-ui.min.js"></script>
     <script src="/jendo/scripts/script.js"></script>
@@ -25,7 +29,7 @@
                 defaults: { controller: "home", action: "index", id: null }
             });
             _.route.init();
-            _.route.renderBody("#result");
+            _.route.renderPage("#result");
         });
     </script>
 </body>

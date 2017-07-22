@@ -355,7 +355,6 @@ jendo.combineUrl = function(url1, url2) {
         return jendo.trimRight(url1, "/") + "/" + url2
     }
 };
-jendo.rootUrl = "";
 jendo.validateUrl = function(url) {
     if (jendo.isNullOrWhiteSpace(url)) {
         return ""
@@ -1663,6 +1662,12 @@ JendoNavigator.prototype.getUserMedia = function(constraints, successCallback, e
     }
 };
 jendo.navigator = new JendoNavigator;
+if (jendo.isNull(jendo.rootUrl)) {
+    jendo.rootUrl = ""
+}
+if (jendo.isNull(jendo.pageLinkType)) {
+    jendo.pageLinkType = 0
+}
 var _ = jendo;
 
 function _jendoSortMultiple() {
