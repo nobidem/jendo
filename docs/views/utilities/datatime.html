@@ -12,5 +12,14 @@
         console.log('dateFormat', jendo.dateFormat(test1Date, 'yy-M-d hh:m:s.ff tt'));
         console.log('dateFormat', jendo.dateFormat(test2Date, 'yyyy-MM-dd H:mm:ss.ff tt'));
         console.log('dateFormat', jendo.dateFormat(test2Date, 'yy-M-d h:m:s.f zzz'));
+
+        console.log('addDays 4', jendo.dateFormat(test1Date.addDays(4), 'yyyy-MM-dd HH:mm:ss.fff zzz'));
+        console.log('addMonths 4', jendo.dateFormat(test1Date.addMonths(4), 'yyyy-MM-dd HH:mm:ss.fff zzz'));
+        console.log('addYears 4', jendo.dateFormat(test1Date.addYears(4), 'yyyy-MM-dd HH:mm:ss.fff zzz'));
+        console.log('addYears -4', jendo.dateFormat(test1Date.addYears(-4), 'yyyy-MM-dd HH:mm:ss.fff zzz'));
+        console.log('addHours 4', jendo.dateFormat(test1Date.addHours(4), 'yyyy-MM-dd HH:mm:ss.fff zzz'));
+        console.log('addMinutes 4', jendo.dateFormat(test1Date.addMinutes(4), 'yyyy-MM-dd HH:mm:ss.fff zzz'));
+        console.log('addSeconds 4', jendo.dateFormat(test1Date.addSeconds(4), 'yyyy-MM-dd HH:mm:ss.fff zzz'));
+        console.log('addMilliseconds 4', jendo.dateFormat(test1Date.addMilliseconds(4), 'yyyy-MM-dd HH:mm:ss.fff zzz'));
     });
 </script>

@@ -45,6 +45,22 @@ jendo.delete = function(url) {
 jendo.getJSONP = function(url) {
     return new JendoJSONPRequest(url)
 };
+jendo.parseFloat = function(val, def) {
+    if (typeof val == "number") {
+        return val
+    } else if (jendo.isNullOrEmpty(val)) {
+        return parseFloat(jendo.isNull(def) ? 0 : def)
+    } else {
+        var fVal = parseFloat(val.replace(/,/g, "."));
+        return isNaN(fVal) ? parseFloat(jendo.isNull(def) ? 0 : def) : fVal
+    }
+};
+jendo.roundFloat = function(val, dec) {
+    if (jendo.isNullOrEmpty(dec)) {
+        dec = 0
+    }
+    return parseFloat(jendo.parseFloat(val, 0).toFixed(dec))
+};
 jendo.createElement = function(tagName) {
     if (jendo.isNullOrWhiteSpace(tagName)) {
         return null
@@ -54,29 +70,29 @@ jendo.createElement = function(tagName) {
         return element
     }
 };
-jendo.createElementDiv = function() {
+jendo.createDiv = function() {
     return jendo.createElement("div")
 };
-jendo.createElementP = function() {
+jendo.createP = function() {
     return jendo.createElement("p")
 };
-jendo.createElementSamp = function() {
+jendo.createSamp = function() {
     return jendo.createElement("samp")
 };
-jendo.createElementSpan = function() {
+jendo.createSpan = function() {
     return jendo.createElement("span")
 };
-jendo.createElementA = function(href, text) {
+jendo.createA = function(href, text) {
     var elm = jendo.createElement("a").attr("href", href);
     if (!jendo.isNullOrEmpty(text)) {
         elm.text(text)
     }
     return elm
 };
-jendo.createElementImg = function(src) {
+jendo.createImg = function(src) {
     return jendo.createElement("img").attr("src", src)
 };
-jendo.createElementButton = function(text) {
+jendo.createButton = function(text) {
     var elm = jendo.createElement("button").attr("type", "button");
     if (!jendo.isNullOrEmpty(text)) {
         elm.text(text)
@@ -92,6 +108,41 @@ jendo.guid = function(delimiter) {
         return (c == "x" ? r : r & 3 | 8).toString(16)
     });
     return uuid
+};
+Date.prototype.addYears = function(years) {
+    var dat = new Date(this.valueOf());
+    dat.setFullYear(dat.getFullYear() + years);
+    return dat
+};
+Date.prototype.addMonths = function(months) {
+    var dat = new Date(this.valueOf());
+    dat.setMonth(dat.getMonth() + months);
+    return dat
+};
+Date.prototype.addDays = function(days) {
+    var dat = new Date(this.valueOf());
+    dat.setDate(dat.getDate() + days);
+    return dat
+};
+Date.prototype.addHours = function(hours) {
+    var dat = new Date(this.valueOf());
+    dat.setHours(dat.getHours() + hours);
+    return dat
+};
+Date.prototype.addMinutes = function(minutes) {
+    var dat = new Date(this.valueOf());
+    dat.setMinutes(dat.getMinutes() + minutes);
+    return dat
+};
+Date.prototype.addSeconds = function(seconds) {
+    var dat = new Date(this.valueOf());
+    dat.setSeconds(dat.getSeconds() + seconds);
+    return dat
+};
+Date.prototype.addMilliseconds = function(ms) {
+    var dat = new Date(this.valueOf());
+    dat.setMilliseconds(dat.getMilliseconds() + ms);
+    return dat
 };
 jendo.now = function() {
     return new Date
@@ -184,7 +235,7 @@ jendo.loadDOM = function(data, element, keepScripts, callback) {
                     element.appendChild(oScript)
                 }
             } else if (docNode.nodeName == "#text") {
-                if (docNode.nodeValue != "" && docNode.nodeValue != "\n") {
+                if (!jendo.isNullOrWhiteSpace(docNode.nodeValue) && docNode.nodeValue != "\n") {
                     var oText = document.createTextNode(docNode.nodeValue);
                     element.appendChild(oText)
                 }
@@ -870,64 +921,67 @@ JendoSelector.prototype.appendElement = function(tagName) {
         return this.append(document.createElement(tagName))
     }
 };
-JendoSelector.prototype.appendElementDiv = function() {
+JendoSelector.prototype.appendDiv = function() {
     return this.append(document.createElement("div"))
 };
-JendoSelector.prototype.appendElementP = function() {
+JendoSelector.prototype.appendP = function() {
     return this.append(document.createElement("p"))
 };
-JendoSelector.prototype.appendElementSamp = function() {
+JendoSelector.prototype.appendSamp = function() {
     return this.append(document.createElement("samp"))
 };
-JendoSelector.prototype.appendElementSpan = function(text) {
+JendoSelector.prototype.appendI = function() {
+    return this.append(document.createElement("i"))
+};
+JendoSelector.prototype.appendSpan = function(text) {
     var elm = this.append(document.createElement("span"));
     if (!jendo.isNullOrEmpty(text)) {
         elm.text(text)
     }
     return elm
 };
-JendoSelector.prototype.appendElementA = function(href, text) {
+JendoSelector.prototype.appendA = function(href, text) {
     var elm = this.append(document.createElement("a")).attr("href", href);
     if (!jendo.isNullOrEmpty(text)) {
         elm.text(text)
     }
     return elm
 };
-JendoSelector.prototype.appendElementButton = function(text) {
+JendoSelector.prototype.appendButton = function(text) {
     var elm = this.append(document.createElement("button")).attr("type", "button");
     if (!jendo.isNullOrEmpty(text)) {
         elm.text(text)
     }
     return elm
 };
-JendoSelector.prototype.appendElementText = function() {
+JendoSelector.prototype.appendText = function() {
     return this.append(document.createElement("input")).attr("type", "text")
 };
-JendoSelector.prototype.appendElementImg = function(src) {
+JendoSelector.prototype.appendImg = function(src) {
     return this.append(document.createElement("img")).attr("src", src)
 };
-JendoSelector.prototype.appendElementUL = function() {
+JendoSelector.prototype.appendUL = function() {
     return this.append(document.createElement("ul"))
 };
-JendoSelector.prototype.appendElementLI = function() {
+JendoSelector.prototype.appendLI = function() {
     return this.append(document.createElement("li"))
 };
-JendoSelector.prototype.appendElementTable = function() {
+JendoSelector.prototype.appendTable = function() {
     return this.append(document.createElement("table"))
 };
-JendoSelector.prototype.appendElementTHead = function() {
+JendoSelector.prototype.appendTHead = function() {
     return this.append(document.createElement("thead"))
 };
-JendoSelector.prototype.appendElementTBody = function() {
+JendoSelector.prototype.appendTBody = function() {
     return this.append(document.createElement("tbody"))
 };
-JendoSelector.prototype.appendElementTR = JendoSelector.prototype.appendElementTRow = function() {
+JendoSelector.prototype.appendTR = JendoSelector.prototype.appendTRow = function() {
     return this.append(document.createElement("tr"))
 };
-JendoSelector.prototype.appendElementTH = function() {
+JendoSelector.prototype.appendTH = function() {
     return this.append(document.createElement("th"))
 };
-JendoSelector.prototype.appendElementTD = function() {
+JendoSelector.prototype.appendTD = function() {
     return this.append(document.createElement("td"))
 };
 JendoSelector.prototype.insert = function(newNode, referenceNode) {
@@ -954,13 +1008,13 @@ JendoSelector.prototype.insertElement = function(tagName, referenceNode) {
         return jendo(element)
     }
 };
-JendoSelector.prototype.insertElementDiv = function() {
+JendoSelector.prototype.insertDiv = function() {
     return this.insertElement("div")
 };
-JendoSelector.prototype.insertElementP = function() {
+JendoSelector.prototype.insertP = function() {
     return this.insertElement("p")
 };
-JendoSelector.prototype.insertElementSamp = function() {
+JendoSelector.prototype.insertSamp = function() {
     return this.insertElement("samp")
 };
 JendoSelector.prototype.insertAfter = function(newNode, referenceNode) {
@@ -1007,6 +1061,27 @@ JendoSelector.prototype.load = function(url, callback) {
                 }
             }
         }).send()
+    }
+    return this
+};
+JendoSelector.prototype.loadHTML = function(value, callback) {
+    var doc = jendo.parseHTML(value);
+    if (doc != null) {
+        var docNodes = doc.body.childNodes;
+        var loadWaiting = 0;
+        for (var i = 0; i < this.items.length; i++) {
+            loadWaiting += 1;
+            jendo.loadDOM(docNodes, this.items[i], true, function() {
+                loadWaiting -= 1;
+                if (loadWaiting == 0 && !jendo.isNull(callback)) {
+                    callback()
+                }
+            })
+        }
+    } else {
+        if (!jendo.isNull(callback)) {
+            callback()
+        }
     }
     return this
 };
@@ -1203,7 +1278,7 @@ JendoSelector.prototype.right = function(value) {
     if (jendo.isNull(value)) {
         var element = this.first();
         if (element != null) {
-            return element.offsetLeft
+            return jendo(element).parent().width() - (element.offsetLeft + element.offsetWidth)
         } else {
             return 0
         }
@@ -1281,12 +1356,55 @@ JendoSelector.prototype.height = function(value) {
         return this
     }
 };
+JendoSelector.prototype.offsetWidth = function(value) {
+    if (jendo.isNull(value)) {
+        var element = this.first();
+        if (element != null) {
+            var constructorName = element.constructor.name;
+            if (constructorName == "HTMLDocument") {
+                return element.body.offsetWidth
+            } else {
+                return element.offsetWidth
+            }
+        } else {
+            return 0
+        }
+    } else {
+        if (value == 0) {} else {
+            if (typeof value == "number") {
+                this.attr("width", value + "px")
+            } else {
+                this.attr("width", value)
+            }
+        }
+        return this
+    }
+};
 JendoSelector.prototype.each = JendoSelector.prototype.forEach = function(callback) {
     if (callback) {
         for (var i = 0; i < this.items.length; i++) {
             callback(i, this.items[i])
         }
     }
+};
+JendoSelector.prototype.dispatchJEvent = function(type, detail) {
+    for (var i = 0; i < this.items.length; i++) {
+        var item = this.items[i];
+        var jdListener = item.jdListener;
+        if (!jendo.isNull(jdListener)) {
+            var typeListener = jdListener[type];
+            if (!jendo.isNull(typeListener)) {
+                for (var l = 0; l < typeListener.length; l++) {
+                    var listenerFunc = typeListener[l].listener;
+                    if (!jendo.isNull(listenerFunc)) {
+                        item.detail = detail;
+                        listenerFunc(item)
+                    }
+                }
+            }
+        }
+    }
+    return this
 };
 JendoSelector.prototype.dispatchEvent = function(type, detail) {
     var evt = new CustomEvent(type, {
@@ -1298,6 +1416,21 @@ JendoSelector.prototype.dispatchEvent = function(type, detail) {
         this.items[i].dispatchEvent(evt)
     }
     return this
+};
+JendoSelector.prototype.addJListener = function(type, listener, data) {
+    for (var i = 0; i < this.items.length; i++) {
+        var item = this.items[i];
+        if (jendo.isNull(item.jdListener)) {
+            item.jdListener = {};
+            item.jdListener[type] = []
+        } else if (jendo.isNull(item.jdListener[type])) {
+            item.jdListener[type] = []
+        }
+        item.jdListener[type].push({
+            listener: listener,
+            data: data
+        })
+    }
 };
 JendoSelector.prototype.on = JendoSelector.prototype.addEventListener = function(type, listener, data) {
     if (jendo.isNull(data)) {
@@ -1384,6 +1517,9 @@ JendoSelector.prototype.blur = function(listener, data) {
     } else {
         return this.addEventListener("blur", listener, data)
     }
+};
+JendoSelector.prototype.change = function(listener, data) {
+    return this.addEventListener("change", listener, data)
 };
 JendoSelector.prototype.onClick = function(handler) {
     for (var i = 0; i < this.items.length; i++) {

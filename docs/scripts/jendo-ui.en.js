@@ -1,13 +1,4 @@
-﻿/*!
- * Jendo UI EN v1.1.1
- * https://nobidem.github.io/jendo/
- *
- * Copyright Nobidem
- * Released under the MIT license
- * https://nobidem.github.io/jendo/license
- */
-
-jendo.lang.load({
+﻿jendo.lang.load({
     weekdayNames: [
         "Sunday",
         "Monday",

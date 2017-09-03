@@ -1,0 +1,15 @@
+﻿<div>
+    parseFloat, roundFloat
+</div>
+<script>
+    _.ready(function () {
+        // parseFloat
+        console.log('parseFloat', jendo.parseFloat(33.55)
+            , jendo.parseFloat('33.55'), jendo.parseFloat('33,55'));
+        console.log('parseFloat', jendo.parseFloat('33,77 лв.')
+            , jendo.parseFloat('лв.'), jendo.parseFloat('лв.', 66));
+        // roundFloat
+        console.log('roundFloat', jendo.roundFloat('33,777 лв.', 2)
+            , jendo.roundFloat('33,777'));
+    });
+</script>

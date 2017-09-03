@@ -79,14 +79,14 @@ function JendoNavBar(elements) {
 }
 JendoNavBar.prototype.append = function(jsonData) {
     if (!jendo.isNull(this.sectionElements) && !jendo.isNull(jsonData)) {
-        var menuItem = this.sectionElements.appendElementLI();
+        var menuItem = this.sectionElements.appendLI();
         if ("items" in jsonData) {
             menuItem.class("dropdown");
             var userItem = null;
             if ("link" in jsonData) {
-                userItem = menuItem.appendElementA(jsonData.link, jsonData.text)
+                userItem = menuItem.appendA(jsonData.link, jsonData.text)
             } else {
-                userItem = menuItem.appendElementButton(jsonData.text)
+                userItem = menuItem.appendButton(jsonData.text)
             }
             var thisNB = this;
             userItem.attr("role", "button").click(function(source) {
@@ -105,12 +105,12 @@ JendoNavBar.prototype.append = function(jsonData) {
                     liElement.addClass("open")
                 }
             });
-            new JendoNavBar(menuItem.appendElementUL().class("dropdown-menu")).load(jsonData.items)
+            new JendoNavBar(menuItem.appendUL().class("dropdown-menu")).load(jsonData.items)
         } else {
             if (!jendo.isNullOrWhiteSpace(jsonData.link)) {
-                menuItem.appendElementA(jsonData.link, jsonData.text)
+                menuItem.appendA(jsonData.link, jsonData.text)
             } else {
-                var userItem = menuItem.appendElementButton(jsonData.text);
+                var userItem = menuItem.appendButton(jsonData.text);
                 userItem.click(function() {
                     document.dispatchEvent(new CustomEvent("navbar.navigate", {
                         detail: jsonData.args
@@ -149,7 +149,7 @@ jendo.navbar = function(element) {
     } else {
         var jdElement = jendo(element);
         if (jdElement.length > 0) {
-            return new JendoNavBar(jdElement.appendElementUL())
+            return new JendoNavBar(jdElement.appendUL())
         } else {
             return new JendoNavBar(null)
         }
@@ -180,23 +180,31 @@ JendoDialog.showPositionTop = 50;
 JendoDialog.prototype.load = function(url, callback) {
     var dialog = this.jDialog;
     jendo.get(url).done(function(responseText) {
-        dialog.html(responseText);
+        dialog.loadHTML(responseText);
         if (callback) {
             callback()
         }
     }).send()
 };
-JendoDialog.prototype.show = function() {
+JendoDialog.prototype.show = function(args) {
     if (this.jDialog.length == 0) {
         return
     }
-    this.jDialog.dispatchEvent("jendo.dialog.show", {});
+    this.jDialog.dispatchJEvent("jendo.dialog.show", args);
+    if (jendo.isNull(args)) {
+        args = {}
+    } else {
+        if (!jendo.isNull(args.style)) {
+            this.jDialog.class("jd-dialog");
+            this.jDialog.addClass(args.style)
+        }
+    }
     if (this.isModalForm) {
         this.jDialog.addClass("jd-dialog-modal")
     }
     var jdDocument = this.jDialog.find('[role="document"]');
     if (jdDocument.length == 0) {
-        jdDocument = jendo.createElementDiv().class("jd-dialog-document").attr("role", "document").attr("tabindex", 0);
+        jdDocument = jendo.createDiv().class("jd-dialog-document").attr("role", "document").attr("tabindex", 0);
         jdDocument.append(this.jDialog.children());
         jdDocument.addClass(this.jDialog.data("class"));
         this.jDialog.append(jdDocument);
@@ -210,7 +218,7 @@ JendoDialog.prototype.show = function() {
     if (jdContent.length == 0) {
         jdContent = jdDocument.find(".jd-dialog-content");
         if (jdContent.length == 0) {
-            jdContent = jendo.createElementDiv().class("jd-dialog-content").attr("data-dialog", "content");
+            jdContent = jendo.createDiv().class("jd-dialog-content").attr("data-dialog", "content");
             jdContent.append(jdDocument.children());
             jdDocument.append(jdContent)
         } else {
@@ -222,13 +230,13 @@ JendoDialog.prototype.show = function() {
         if (jdTitlebar.length == 0) {
             jdTitlebar = jdDocument.find(".jd-dialog-titlebar");
             if (jdTitlebar.length == 0) {
-                jdTitlebar = jdDocument.insertElementDiv().class("jd-dialog-titlebar").attr("data-dialog", "titlebar");
+                jdTitlebar = jdDocument.insertDiv().class("jd-dialog-titlebar").attr("data-dialog", "titlebar");
                 if (this.withCloseBtnLeft) {
-                    jdTitlebar.appendElement().class("jd-dt-button jd-dt-button-left").appendElementButton().attr("data-dialog", "close").appendElement("i").class("fa fa-chevron-left").attr("aria-hidden", "true")
+                    jdTitlebar.appendElement().class("jd-dt-button jd-dt-button-left").appendButton().attr("data-dialog", "close").appendI().class("fa fa-chevron-left").attr("aria-hidden", "true")
                 }
-                jdTitlebar.appendElementDiv().class("jd-dt-title").text(this.dialogTitle);
+                jdTitlebar.appendDiv().class("jd-dt-title").text(jendo.isNullOrWhiteSpace(args.title) ? this.dialogTitle : args.title);
                 if (this.withCloseBtnRight) {
-                    jdTitlebar.appendElementDiv().class("jd-dt-button jd-dt-button-right").appendElementButton().attr("data-dialog", "close").class("jd-bnt").appendElement("i").class("fa fa-times").attr("aria-hidden", "true")
+                    jdTitlebar.appendDiv().class("jd-dt-button jd-dt-button-right").appendButton().attr("data-dialog", "close").class("jd-btn").appendI().class("fa fa-times").attr("aria-hidden", "true")
                 }
             } else {
                 jdTitlebar.attr("data-dialog", "titlebar")
@@ -237,14 +245,20 @@ JendoDialog.prototype.show = function() {
             if (jendo.isNullOrEmpty(jdDocument.attr("class"))) {
                 jdDocument.attr("class", "jd-dialog-titlebar")
             }
+            if (!jendo.isNullOrWhiteSpace(args.title)) {
+                jdTitlebar.find(".jd-dt-title").text(args.title)
+            }
         }
         var htmlDocument = jendo(document);
         jdTitlebar.mouseDown(function(e) {
-            var targetElement = JendoDialog.findDocument(e.target);
-            if (!jendo.isNull(targetElement)) {
-                JendoDialog.moveElement = jendo(targetElement);
-                JendoDialog.moveTop = e.offsetY + e.target.offsetTop;
-                JendoDialog.moveLeft = e.offsetX + e.target.offsetLeft
+            var targetEl = jendo(e.target);
+            if (targetEl.attr("data-dialog") != "close") {
+                var docEl = JendoDialog.findDocument(e.target);
+                if (!jendo.isNull(docEl)) {
+                    JendoDialog.moveElement = jendo(docEl);
+                    JendoDialog.moveTop = e.offsetY + e.target.offsetTop;
+                    JendoDialog.moveLeft = e.offsetX + e.target.offsetLeft
+                }
             }
         });
         htmlDocument.mouseUp(function(e) {
@@ -293,34 +307,37 @@ JendoDialog.prototype.show = function() {
     }
     jdDocument.position(pos);
     jdDocument.focus();
-    this.jDialog.dispatchEvent("jendo.dialog.shown", {})
+    this.jDialog.dispatchJEvent("jendo.dialog.shown", args)
 };
-JendoDialog.prototype.showModal = function() {
+JendoDialog.prototype.showModal = function(args) {
     this.isModalForm = true;
-    this.show()
+    this.show(args)
 };
-JendoDialog.prototype.hide = function() {
+JendoDialog.prototype.hide = function(args) {
     if (this.jDialog.length == 0) {
         return
     }
-    this.jDialog.dispatchEvent("jendo.dialog.hide", {});
+    if (jendo.isNull(args)) {
+        args = {}
+    }
+    this.jDialog.dispatchJEvent("jendo.dialog.hide", args);
     this.jDialog.hide();
-    this.jDialog.dispatchEvent("jendo.dialog.hidden", {})
+    this.jDialog.dispatchJEvent("jendo.dialog.hidden", args)
 };
 JendoDialog.prototype.onShow = function(listener) {
-    this.jDialog.on("jendo.dialog.show", listener);
+    this.jDialog.addJListener("jendo.dialog.show", listener);
     return this
 };
 JendoDialog.prototype.onShown = function(listener) {
-    this.jDialog.on("jendo.dialog.shown", listener);
+    this.jDialog.addJListener("jendo.dialog.shown", listener);
     return this
 };
 JendoDialog.prototype.onHide = function(listener) {
-    this.jDialog.on("jendo.dialog.hide", listener);
+    this.jDialog.addJListener("jendo.dialog.hide", listener);
     return this
 };
 JendoDialog.prototype.onHidden = function(listener) {
-    this.jDialog.on("jendo.dialog.hidden", listener);
+    this.jDialog.addJListener("jendo.dialog.hidden", listener);
     return this
 };
 JendoDialog.findDialog = function(target) {
@@ -368,7 +385,8 @@ function JendoDatepicker(element, options) {
             weekdayStart: 1,
             format: "yyyy-MM-dd",
             viewMode: "days",
-            showButton: false
+            showButton: false,
+            position: "left"
         };
         this.dElement.options = this.dpOptions
     }
@@ -388,7 +406,11 @@ function JendoDatepicker(element, options) {
             if (jdDatepicker.isVisible()) {
                 jdDatepicker.hide()
             } else {
-                jdDatepicker.left(jdp.jdElement.left());
+                if (jdp.dpOptions.position == "right") {
+                    jdDatepicker.left(jdp.jdElement.left() + jdp.jdElement.width() - 228)
+                } else {
+                    jdDatepicker.left(jdp.jdElement.left())
+                }
                 jdDatepicker.show();
                 _JendoFuncCloseElement = jdp.hideElement;
                 _JendoLastOpenElement = jdDatepicker
@@ -428,6 +450,14 @@ JendoDatepicker.prototype.format = function(pattern) {
         }
         return this
     }
+};
+JendoDatepicker.prototype.positionLeft = function() {
+    this.dpOptions.position = "left";
+    return this
+};
+JendoDatepicker.prototype.positionRight = function() {
+    this.dpOptions.position = "right";
+    return this
 };
 JendoDatepicker.prototype.createDatepicker = function(datepickerId) {
     var dp = document.createElement("div");
@@ -621,7 +651,7 @@ function JendoGridView(element) {
     this._Element = element;
     this._GridView = this._Element.find('[role="grid"]');
     if (this._GridView.length == 0) {
-        this._GridView = this._Element.appendElementTable().role("grid")
+        this._GridView = this._Element.appendTable().role("grid")
     }
     this._GVData = this._GridView.prop("gvdata");
     if (jendo.isNull(this._GVData)) {
@@ -658,6 +688,17 @@ JendoGridView.prototype.data = function(value) {
     if (jendo.isNull(value)) {
         return this
     }
+    if ("allowPaging" in value) {
+        this._GVData.allowPaging = value.allowPaging
+    }
+    if ("filterable" in value) {
+        if ("enabled" in value.filterable) {
+            this._GVData.filterable.enabled = value.filterable.enabled
+        }
+        if ("mode" in value.filterable) {
+            this._GVData.filterable.mode = value.filterable.mode
+        }
+    }
     if ("show" in value) {
         if ("rowNo" in value.show) {
             this._GVData.show.rowNo = value.show.rowNo
@@ -683,24 +724,24 @@ JendoGridView.prototype.columns = function(value) {
         var gFilterable = this._GVData.filterable;
         var sortData = this._GVData.sortData;
         var filterData = this._GVData.filterData;
-        var tHead = this._GridView.appendElementTHead();
-        var tRow = tHead.appendElementTRow();
+        var tHead = this._GridView.appendTHead();
+        var tRow = tHead.appendTRow();
         var tRowFilter = null;
         if (gFilterable.enabled && gFilterable.mode == "row") {
-            tRowFilter = tHead.appendElementTRow()
+            tRowFilter = tHead.appendTRow()
         }
         if (this._GVData.show.rowNo) {
-            tRow.appendElementTH().text("#")
+            tRow.appendTH().text("#")
         }
         if (tRowFilter != null && this._GVData.show.rowNo) {
-            tRowFilter.appendElementTH()
+            tRowFilter.appendTH()
         }
         for (var i = 0; i < value.length; i++) {
             var gCol = value[i];
             if (jendo.isNullOrEmpty(gCol.caption)) {
                 gCol.caption = ""
             }
-            var th = tRow.appendElementTH();
+            var th = tRow.appendTH();
             th.text(gCol.caption);
             if (!jendo.isNull(gCol.field)) {
                 th.append('<i class="fa fa-sort-asc jd-sort-asc" aria-hidden="true"></i>');
@@ -748,8 +789,8 @@ JendoGridView.prototype.columns = function(value) {
                 });
                 gColumns.push(gCol);
                 if (tRowFilter != null) {
-                    var thrf = tRowFilter.appendElementTH();
-                    thrf.appendElementText("input").data("field", gCol.field).keyUp(function(e) {
+                    var thrf = tRowFilter.appendTH();
+                    thrf.appendText("input").data("field", gCol.field).keyUp(function(e) {
                         var dField = _(e.target);
                         var dFieldName = dField.data("field");
                         var dFieldValue = dField.val();
@@ -772,8 +813,10 @@ JendoGridView.prototype.columns = function(value) {
             } else if (!jendo.isNull(gCol.commands)) {
                 gColumns.push(gCol);
                 if (tRowFilter != null) {
-                    var thrf = tRowFilter.appendElementTH()
+                    var thrf = tRowFilter.appendTH()
                 }
+            } else if (!jendo.isNull(gCol.bind)) {
+                gColumns.push(gCol)
             }
         }
     }
@@ -782,7 +825,7 @@ JendoGridView.prototype.records = function(value) {
     if (!jendo.isNull(value)) {
         var gColumns = this._GVData.columns;
         this._GVData.records = value;
-        var tBody = this._GridView.appendElementTBody().role("rowgroup");
+        var tBody = this._GridView.appendTBody().role("rowgroup");
         this.appendGRows(tBody, gColumns, value, this._GVData);
         this.appendGPaging(tBody, gColumns, value, this._GVData)
     }
@@ -832,8 +875,8 @@ JendoGridView.prototype.appendGRows = function(tBody, gColumns, gRecords, gvData
 JendoGridView.prototype.appendGPaging = function(tBody, gColumns, gRecords, gvData) {
     if (gvData.allowPaging) {
         var thisJGV = this;
-        var tRow = tBody.appendElementTRow().addClass("jd-pager");
-        var td = tRow.appendElementTD();
+        var tRow = tBody.appendTRow().addClass("jd-pager");
+        var td = tRow.appendTD();
         var countColumns = gColumns.length;
         if (gvData.show.rowNo) {
             countColumns += 1
@@ -846,19 +889,19 @@ JendoGridView.prototype.appendGPaging = function(tBody, gColumns, gRecords, gvDa
         td.attr("colspan", countColumns);
         var pager = gvData.pager;
         if (pager.firstLast) {
-            var btnFirst = td.appendElementButton().addClass("jd-pager-btn").click(function(e) {
+            var btnFirst = td.appendButton().addClass("jd-pager-btn").click(function(e) {
                 thisJGV.pageFirst()
             });
-            btnFirst.appendElement("i").attr("class", "fa fa-angle-double-left").attr("aria-hidden", true);
+            btnFirst.appendI().attr("class", "fa fa-angle-double-left").attr("aria-hidden", true);
             if (gvData.pageNo == 1) {
                 btnFirst.attr("disabled", "")
             }
         }
         if (pager.prevNext) {
-            var btnPrev = td.appendElementButton().addClass("jd-pager-btn").click(function(e) {
+            var btnPrev = td.appendButton().addClass("jd-pager-btn").click(function(e) {
                 thisJGV.pagePrev()
             });
-            btnPrev.appendElement("i").attr("class", "fa fa-angle-left").attr("aria-hidden", true);
+            btnPrev.appendI().attr("class", "fa fa-angle-left").attr("aria-hidden", true);
             if (gvData.pageNo == 1) {
                 btnPrev.attr("disabled", "")
             }
@@ -866,7 +909,7 @@ JendoGridView.prototype.appendGPaging = function(tBody, gColumns, gRecords, gvDa
         if (pager.numeric) {
             var numericCount = pager.numericCount > gvData.countPage ? gvData.countPage : pager.numericCount;
             for (var i = 1; i <= numericCount; i++) {
-                var btnNumeric = td.appendElementButton(i).addClass("jd-pager-btn").click(function(e) {
+                var btnNumeric = td.appendButton(i).addClass("jd-pager-btn").click(function(e) {
                     thisJGV.pageNo(e.data.pageNo)
                 }, {
                     pageNo: i
@@ -874,29 +917,29 @@ JendoGridView.prototype.appendGPaging = function(tBody, gColumns, gRecords, gvDa
             }
         }
         if (pager.prevNext) {
-            var btnNext = td.appendElementButton().addClass("jd-pager-btn").click(function(e) {
+            var btnNext = td.appendButton().addClass("jd-pager-btn").click(function(e) {
                 thisJGV.pageNext()
             });
-            btnNext.appendElement("i").attr("class", "fa fa-angle-right").attr("aria-hidden", true);
+            btnNext.appendI().attr("class", "fa fa-angle-right").attr("aria-hidden", true);
             if (gvData.pageNo == gvData.countPage) {
                 btnNext.attr("disabled", "")
             }
         }
         if (pager.firstLast) {
-            var btnLast = td.appendElementButton().addClass("jd-pager-btn").click(function(e) {
+            var btnLast = td.appendButton().addClass("jd-pager-btn").click(function(e) {
                 thisJGV.pageLast()
             });
-            btnLast.appendElement("i").attr("class", "fa fa-angle-double-right").attr("aria-hidden", true);
+            btnLast.appendI().attr("class", "fa fa-angle-double-right").attr("aria-hidden", true);
             if (gvData.pageNo == gvData.countPage) {
                 btnLast.attr("disabled", "")
             }
         }
         if (pager.goToPage) {
-            var pnlGTP = td.appendElementDiv().addClass("jd-pager-panel");
-            pnlGTP.appendElement("span").text("Page:");
-            var textGTP = pnlGTP.appendElementText();
-            pnlGTP.appendElement("span").text("of " + gvData.countPage);
-            pnlGTP.appendElementButton("Go").addClass("jd-pager-btn").click(function(e) {
+            var pnlGTP = td.appendDiv().addClass("jd-pager-panel");
+            pnlGTP.appendSpan().text("Page:");
+            var textGTP = pnlGTP.appendText();
+            pnlGTP.appendSpan().text("of " + gvData.countPage);
+            pnlGTP.appendButton("Go").addClass("jd-pager-btn").click(function(e) {
                 var goToPage = parseInt(textGTP.val());
                 if (goToPage > 0) {
                     thisJGV.pageNo(textGTP.val())
@@ -904,11 +947,11 @@ JendoGridView.prototype.appendGPaging = function(tBody, gColumns, gRecords, gvDa
             })
         }
         if (pager.pageSize) {
-            var pnlPS = td.appendElementDiv().addClass("jd-pager-panel");
-            pnlPS.appendElement("span").text("Page size:");
+            var pnlPS = td.appendDiv().addClass("jd-pager-panel");
+            pnlPS.appendSpan().text("Page size:");
             if (Array.isArray(pager.pageSizeList) && pager.pageSizeList.length > 0) {} else {
-                var textPS = pnlPS.appendElementText().val(gvData.pageSize);
-                pnlPS.appendElementButton("Change").addClass("jd-pager-btn").click(function() {
+                var textPS = pnlPS.appendText().val(gvData.pageSize);
+                pnlPS.appendButton("Change").addClass("jd-pager-btn").click(function() {
                     console.log("Change", textPS.val())
                 })
             }
@@ -917,24 +960,27 @@ JendoGridView.prototype.appendGPaging = function(tBody, gColumns, gRecords, gvDa
 };
 JendoGridView.prototype.recordBound = function(rowIndex, tBody, gRow, gColumns) {
     var isAlt = rowIndex % 2;
-    var tRow = tBody.appendElementTRow();
+    var tRow = tBody.appendTRow();
     if (isAlt == 1) {
         tRow.addClass("jd-alt")
     }
     if (this._GVData.show.rowNo) {
-        var tdNo = tRow.appendElementTD().text(rowIndex + 1 + ".")
+        var tdNo = tRow.appendTD().text(rowIndex + 1 + ".")
     }
     for (var f = 0; f < gColumns.length; f++) {
         var gCol = gColumns[f];
-        var td = tRow.appendElementTD();
+        var td = tRow.appendTD();
         if (!jendo.isNull(gCol.field)) {
             var tdValue = gRow[gCol.field];
             td.html(tdValue)
         } else if (!jendo.isNull(gCol.commands)) {
             for (var c = 0; c < gCol.commands.length; c++) {
                 var command = gCol.commands[c];
-                var btn = td.appendElementButton(command.caption);
-                btn.class("jd-grid-bnt-link");
+                var btn = td.appendButton(command.caption);
+                btn.class("jd-grid-btn-link");
+                if (!jendo.isNullOrWhiteSpace(command.style)) {
+                    btn.addClass(command.style)
+                }
                 if (!jendo.isNull(command.click)) {
                     var commandValue = {
                         rowIndex: rowIndex,
@@ -949,6 +995,13 @@ JendoGridView.prototype.recordBound = function(rowIndex, tBody, gRow, gColumns) 
                     btn.click(this.clickCommand(command.click, commandValue))
                 }
             }
+        } else if (!jendo.isNull(gCol.bind)) {
+            var tdValue = gCol.bind({
+                rowIndex: rowIndex,
+                colIndex: f,
+                row: gRow
+            });
+            td.html(tdValue)
         }
     }
 };
@@ -1151,4 +1204,55 @@ JendoQRCodeReader.prototype.files = function(value) {
 };
 jendo.QRCodeReader = function(element) {
     return new JendoQRCodeReader(element)
+};
+
+function JendoToolbar(element, options) {
+    this.jdElement = element;
+    if (jendo.isNull(options)) {
+        return this
+    } else if (!jendo.isNull(options.menu)) {
+        var tabMenu = this.jdElement.appendDiv().class("jd-toolbar jd-toolbar-default");
+        this.loadMenu(tabMenu, options)
+    } else if (!jendo.isNull(options.tabs)) {
+        var tBar = this.jdElement.appendDiv().class("jd-toolbar jd-toolbar-default");
+        var tabMenu = tBar.appendUL().class("jd-tb-tabs");
+        var selTab = null;
+        for (var t = 0; t < options.tabs.length; t++) {
+            var menuItem = options.tabs[t];
+            var tabItemMenu = this.loadMenu(tBar, menuItem);
+            tabItemMenu.hide();
+            var menuBtn = tabMenu.appendLI().appendButton().class("jd-tb-button").text(menuItem.title).click(function(e) {
+                var tiBtn = jendo(e.target);
+                tiBtn.parent().parent().find("button").removeClass("jd-tb-active");
+                tiBtn.addClass("jd-tb-active");
+                var tiMenu = e.data.tabMenu;
+                tiMenu.parent().find(".jd-tb-menu").hide();
+                tiMenu.show()
+            }, {
+                tabMenu: tabItemMenu
+            });
+            menuBtn.prop("menu", tabItemMenu);
+            if (menuItem.selected || selTab == null) {
+                selTab = menuBtn
+            }
+        }
+        if (selTab != null) {
+            selTab.addClass("jd-tb-active");
+            selTab.prop("menu").show()
+        }
+        return this
+    }
+}
+JendoToolbar.prototype.loadMenu = function(jdTab, tbMenu) {
+    var tabMenu = jdTab.appendUL().class("jd-tb-menu");
+    for (var i = 0; i < tbMenu.menu.length; i++) {
+        var menuItem = tbMenu.menu[i];
+        var menuBtn = tabMenu.appendLI().appendButton().class("jd-tb-button");
+        menuBtn.appendI().class(menuItem.glyphs).attr("aria-hidden", true);
+        menuBtn.appendSamp().text(menuItem.title)
+    }
+    return tabMenu
+};
+jendo.toolbar = function(element, options) {
+    return new JendoToolbar(jendo(element), options)
 };

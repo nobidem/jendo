@@ -25,7 +25,6 @@ body {
 }
 
 .jd-navbar .dropdown-menu li,
-.jd-navbar .open>.dropdown-menu,
 article,
 aside,
 details,
@@ -143,14 +142,6 @@ hr {
     height: 0
 }
 
-button,
-input,
-select,
-textarea {
-    font: inherit;
-    margin: 0
-}
-
 optgroup {
     font-weight: 700
 }
@@ -239,7 +230,9 @@ legend {
 
 *,
 ::after,
-::before {
+::before,
+input[type=checkbox],
+input[type=radio] {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box
@@ -255,19 +248,70 @@ legend {
     clear: both
 }
 
-.jd-bnt {
+label {
+    display: inline-block;
+    max-width: 100%;
+    margin-bottom: 5px;
+    font-weight: 700
+}
+
+button,
+input,
+select,
+textarea {
+    line-height: inherit;
+    margin: 0;
+    font: inherit;
+    color: inherit
+}
+
+input[type=checkbox],
+input[type=radio] {
+    margin: 4px 0 0;
+    line-height: normal;
+    padding: 0
+}
+
+.jd-checkbox,
+.jd-radio {
+    position: relative;
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 10px
+}
+
+.jd-btn,
+.jd-checkbox label,
+.jd-radio label {
+    margin-bottom: 0;
+    font-weight: 400;
+    cursor: pointer
+}
+
+.jd-checkbox label,
+.jd-radio label {
+    min-height: 20px;
+    padding-left: 20px
+}
+
+.jd-checkbox input[type=checkbox],
+.jd-checkbox-inline input[type=checkbox],
+.jd-radio input[type=radio],
+.jd-radio-inline input[type=radio] {
+    position: absolute;
+    margin-left: -20px
+}
+
+.jd-btn {
     display: inline-block;
     padding: 6px 12px;
-    margin-bottom: 0;
     font-size: 14px;
-    font-weight: 400;
     line-height: 1.42857143;
     text-align: center;
     white-space: nowrap;
     vertical-align: middle;
     -ms-touch-action: manipulation;
     touch-action: manipulation;
-    cursor: pointer;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -278,33 +322,289 @@ legend {
     outline: 0!important
 }
 
-button.jd-bnt {
-    line-height: inherit;
-    -webkit-appearance: button;
-    cursor: pointer;
-    text-transform: none;
-    margin: 0;
-    font: inherit;
-    color: inherit
+.jd-btn.active.focus,
+.jd-btn.active:focus,
+.jd-btn.focus,
+.jd-btn:active.focus,
+.jd-btn:active:focus,
+.jd-btn:focus {
+    outline: 5px auto -webkit-focus-ring-color;
+    outline-offset: -2px
 }
 
-a.jd-bnt {
+.jd-btn.focus,
+.jd-btn:focus,
+.jd-btn:hover {
+    color: #333;
+    text-decoration: none
+}
+
+.jd-btn.active,
+.jd-btn:active {
+    background-image: none;
+    outline: 0;
+    -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+    box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125)
+}
+
+.jd-btn.disabled,
+.jd-btn[disabled],
+fieldset[disabled] .jd-btn {
+    cursor: not-allowed;
+    filter: alpha(opacity=65);
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    opacity: .65
+}
+
+a.jd-btn.disabled,
+fieldset[disabled] a.jd-btn {
+    pointer-events: none
+}
+
+a.jd-btn {
     text-decoration: none;
     padding: 6px 12px
 }
 
-.jd-bnt-default {
+.jd-btn-default {
     color: #333;
     background-color: #fff;
-    border-color: #ccc;
-    text-shadow: 0 1px 0 #fff;
-    background-repeat: repeat-x;
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .15), 0 1px 1px rgba(0, 0, 0, .075)
+    border-color: #ccc
 }
 
-.jd-bnt-gray {
-    background-color: #454545!important;
-    color: #fff!important
+.jd-btn-default.focus,
+.jd-btn-default:focus {
+    color: #333;
+    background-color: #e6e6e6;
+    border-color: #8c8c8c
+}
+
+.jd-btn-default.active,
+.jd-btn-default:active,
+.jd-btn-default:hover,
+.open>.jd-dropdown-toggle.jd-btn-default {
+    color: #333;
+    background-color: #e6e6e6;
+    border-color: #adadad
+}
+
+.jd-btn-default.active.focus,
+.jd-btn-default.active:focus,
+.jd-btn-default.active:hover,
+.jd-btn-default:active.focus,
+.jd-btn-default:active:focus,
+.jd-btn-default:active:hover,
+.open>.jd-dropdown-toggle.jd-btn-default.focus,
+.open>.jd-dropdown-toggle.jd-btn-default:focus,
+.open>.jd-dropdown-toggle.jd-btn-default:hover {
+    color: #333;
+    background-color: #d4d4d4;
+    border-color: #8c8c8c
+}
+
+.jd-btn-default.active,
+.jd-btn-default:active,
+.open>.jd-dropdown-toggle.jd-btn-default {
+    background-image: none
+}
+
+.jd-btn-default.disabled.focus,
+.jd-btn-default.disabled:focus,
+.jd-btn-default.disabled:hover,
+.jd-btn-default[disabled].focus,
+.jd-btn-default[disabled]:focus,
+.jd-btn-default[disabled]:hover,
+fieldset[disabled] .jd-btn-default.focus,
+fieldset[disabled] .jd-btn-default:focus,
+fieldset[disabled] .jd-btn-default:hover {
+    background-color: #fff;
+    border-color: #ccc
+}
+
+.jd-btn-default .badge {
+    color: #fff;
+    background-color: #333
+}
+
+.jd-btn-primary {
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #2e6da4
+}
+
+.jd-btn-primary.focus,
+.jd-btn-primary:focus {
+    color: #fff;
+    background-color: #286090;
+    border-color: #122b40
+}
+
+.jd-btn-primary.active,
+.jd-btn-primary:active,
+.jd-btn-primary:hover,
+.open>.jd-dropdown-toggle.jd-btn-primary {
+    color: #fff;
+    background-color: #286090;
+    border-color: #204d74
+}
+
+.jd-btn-primary.active.focus,
+.jd-btn-primary.active:focus,
+.jd-btn-primary.active:hover,
+.jd-btn-primary:active.focus,
+.jd-btn-primary:active:focus,
+.jd-btn-primary:active:hover,
+.open>.jd-dropdown-toggle.jd-btn-primary.focus,
+.open>.jd-dropdown-toggle.jd-btn-primary:focus,
+.open>.jd-dropdown-toggle.jd-btn-primary:hover {
+    color: #fff;
+    background-color: #204d74;
+    border-color: #122b40
+}
+
+.jd-btn-primary.active,
+.jd-btn-primary:active,
+.open>.jd-dropdown-toggle.jd-btn-primary {
+    background-image: none
+}
+
+.jd-btn-primary.disabled.focus,
+.jd-btn-primary.disabled:focus,
+.jd-btn-primary.disabled:hover,
+.jd-btn-primary[disabled].focus,
+.jd-btn-primary[disabled]:focus,
+.jd-btn-primary[disabled]:hover,
+fieldset[disabled] .jd-btn-primary.focus,
+fieldset[disabled] .jd-btn-primary:focus,
+fieldset[disabled] .jd-btn-primary:hover {
+    background-color: #337ab7;
+    border-color: #2e6da4
+}
+
+.jd-btn-primary .badge {
+    color: #337ab7;
+    background-color: #fff
+}
+
+.jd-btn-gray {
+    color: #fff;
+    background-color: #555;
+    border-color: #454545
+}
+
+.jd-btn-gray.focus,
+.jd-btn-gray:focus {
+    color: #fff;
+    background-color: #454545;
+    border-color: #272727
+}
+
+.jd-btn-gray.active,
+.jd-btn-gray:active,
+.jd-btn-gray:hover,
+.open>.jd-dropdown-toggle.jd-btn-gray {
+    color: #fff;
+    background-color: #454545;
+    border-color: #272727
+}
+
+.jd-btn-gray.active.focus,
+.jd-btn-gray.active:focus,
+.jd-btn-gray.active:hover,
+.jd-btn-gray:active.focus,
+.jd-btn-gray:active:focus,
+.jd-btn-gray:active:hover,
+.open>.jd-dropdown-toggle.jd-btn-gray.focus,
+.open>.jd-dropdown-toggle.jd-btn-gray:focus,
+.open>.jd-dropdown-toggle.jd-btn-gray:hover {
+    color: #fff;
+    background-color: #454545;
+    border-color: #272727
+}
+
+.jd-btn-gray.active,
+.jd-btn-gray:active,
+.open>.jd-dropdown-toggle.jd-btn-gray {
+    background-image: none
+}
+
+.jd-btn-gray.disabled.focus,
+.jd-btn-gray.disabled:focus,
+.jd-btn-gray.disabled:hover,
+.jd-btn-gray[disabled].focus,
+.jd-btn-gray[disabled]:focus,
+.jd-btn-gray[disabled]:hover,
+fieldset[disabled] .jd-btn-gray.focus,
+fieldset[disabled] .jd-btn-gray:focus,
+fieldset[disabled] .jd-btn-gray:hover {
+    background-color: #656565;
+    border-color: #454545
+}
+
+.jd-btn-gray .badge {
+    color: #454545;
+    background-color: #fff
+}
+
+.jd-btn-success {
+    color: #fff;
+    background-color: #5cb85c;
+    border-color: #4cae4c
+}
+
+.jd-btn-success.focus,
+.jd-btn-success:focus {
+    color: #fff;
+    background-color: #449d44;
+    border-color: #255625
+}
+
+.jd-btn-success.active,
+.jd-btn-success:active,
+.jd-btn-success:hover,
+.open>.jd-dropdown-toggle.jd-btn-success {
+    color: #fff;
+    background-color: #449d44;
+    border-color: #398439
+}
+
+.jd-btn-success.active.focus,
+.jd-btn-success.active:focus,
+.jd-btn-success.active:hover,
+.jd-btn-success:active.focus,
+.jd-btn-success:active:focus,
+.jd-btn-success:active:hover,
+.open>.jd-dropdown-toggle.jd-btn-success.focus,
+.open>.jd-dropdown-toggle.jd-btn-success:focus,
+.open>.jd-dropdown-toggle.jd-btn-success:hover {
+    color: #fff;
+    background-color: #398439;
+    border-color: #255625
+}
+
+.jd-btn-success.active,
+.jd-btn-success:active,
+.open>.jd-dropdown-toggle.jd-btn-success {
+    background-image: none
+}
+
+.jd-btn-success.disabled.focus,
+.jd-btn-success.disabled:focus,
+.jd-btn-success.disabled:hover,
+.jd-btn-success[disabled].focus,
+.jd-btn-success[disabled]:focus,
+.jd-btn-success[disabled]:hover,
+fieldset[disabled] .jd-btn-success.focus,
+fieldset[disabled] .jd-btn-success:focus,
+fieldset[disabled] .jd-btn-success:hover {
+    background-color: #5cb85c;
+    border-color: #4cae4c
+}
+
+.jd-btn-success .badge {
+    color: #5cb85c;
+    background-color: #fff
 }
 
 .jd-link {
@@ -317,11 +617,23 @@ a.jd-bnt {
     text-decoration: underline
 }
 
-button.jd-bnt-sm {
+button.jd-btn-sm {
     padding: 5px 10px;
     font-size: 12px;
     line-height: 1.5;
     border-radius: 3px
+}
+
+.jd-input-group {
+    position: relative;
+    display: table;
+    border-collapse: separate
+}
+
+.jd-input-group[class*=col-] {
+    float: none;
+    padding-right: 0;
+    padding-left: 0
 }
 
 .jd-section {
@@ -362,7 +674,7 @@ button.jd-bnt-sm {
 
 .jd-navbar ul li a,
 .jd-navbar ul li button {
-    padding: 10px;
+    padding: 5px 10px;
     display: inline-block;
     outline: 0;
     border: 0;
@@ -379,7 +691,12 @@ button.jd-bnt-sm {
 .jd-navbar .dropdown-menu li a {
     padding: 3px 20px;
     display: inline-block;
-    outline: 0
+    outline: 0;
+    width: 100%
+}
+
+.jd-navbar .open>.dropdown-menu {
+    display: block
 }
 
 .jd-navbar-default {
@@ -390,9 +707,16 @@ button.jd-bnt-sm {
 .jd-navbar-default ul li a,
 .jd-navbar-default ul li button {
     color: #777;
+    border: 1px solid #f8f8f8;
     text-decoration: none;
     background-color: transparent;
     outline: 0!important
+}
+
+.jd-navbar-default ul li a:hover,
+.jd-navbar-default ul li button:hover {
+    background-color: #e8eff7;
+    border: 1px solid #a4cef9
 }
 
 .jd-navbar-default .dropdown-menu {
@@ -423,13 +747,14 @@ button.jd-bnt-sm {
 
 .jd-dialog .jd-dialog-document {
     border: 1px solid #aaa;
+    background-color: #fff;
     position: absolute;
-    outline: 0
+    outline: 0;
+    border-radius: 6px
 }
 
 .jd-dialog .jd-dialog-titlebar {
     width: 100%;
-    background-color: #fff;
     cursor: move;
     -webkit-user-select: none;
     -khtml-user-select: none;
@@ -437,25 +762,39 @@ button.jd-bnt-sm {
     -o-user-select: none;
     user-select: none;
     border-bottom: 1px solid #aaa;
-    display: table
+    display: table;
+    background-color: #f7f7f9;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px
 }
 
 .jd-dialog .jd-dialog-titlebar .jd-dt-title {
     display: table-cell;
     padding: 5px 10px;
-    vertical-align: middle
+    vertical-align: middle;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 700
 }
 
 .jd-dialog .jd-dialog-titlebar .jd-dt-button {
-    color: #4285f4;
     display: table-cell;
     font-size: 20px;
-    cursor: pointer
+    padding: 5px 3px;
+    cursor: pointer;
+    width: 45px
 }
 
 .jd-dialog .jd-dialog-titlebar .jd-dt-button button {
     padding: 0 10px;
-    background-color: transparent
+    background-color: transparent;
+    font-size: 24px;
+    color: #337ab7
+}
+
+.jd-dialog .jd-dialog-titlebar .jd-dt-button button:hover {
+    color: #fff;
+    background-color: #d9534f
 }
 
 .jd-dialog .jd-dialog-titlebar .jd-dt-button-left {
@@ -466,10 +805,9 @@ button.jd-bnt-sm {
     text-align: right
 }
 
-.datepicker,
 .jd-dialog .jd-dialog-content,
 .jd-dialog .jd-dialog-footer {
-    background-color: #fff
+    padding: 10px
 }
 
 @media (max-width:312px) {
@@ -515,7 +853,9 @@ button.jd-bnt-sm {
     width: 228px;
     text-align: center;
     border-radius: 5px;
-    position: absolute
+    position: absolute;
+    background-color: #fff;
+    z-index: 101
 }
 
 .datepicker .dp-head {
@@ -685,11 +1025,16 @@ button.jd-bnt-sm {
     background-color: #f1f1f1
 }
 
-.jd-grid table .jd-grid-bnt-link {
+.jd-grid table .jd-grid-btn-link {
     border: 0;
     background-color: transparent;
     cursor: pointer;
-    outline: 0
+    outline: 0;
+    color: #1a0dab
+}
+
+.jd-grid table .jd-grid-btn-link:hover {
+    font-weight: 700
 }
 
 .jd-grid .jd-pager td {
@@ -717,4 +1062,1553 @@ button.jd-bnt-sm {
     padding-top: 0;
     padding-bottom: 0;
     width: 40px
+}
+
+.jd-container {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto
+}
+
+.jd-row {
+    margin-right: -15px;
+    margin-left: -15px
+}
+
+.jd-form-horizontal .jd-form-group::before,
+.jd-row::after,
+.jd-row::before {
+    display: table;
+    content: " "
+}
+
+.jd-row::after {
+    clear: both
+}
+
+.jd-col-xs-1 {
+    width: 5%;
+    float: left
+}
+
+.jd-col-xs-2 {
+    width: 10%;
+    float: left
+}
+
+.jd-col-xs-3 {
+    width: 15%;
+    float: left
+}
+
+.jd-col-xs-4 {
+    width: 20%;
+    float: left
+}
+
+.jd-col-xs-5 {
+    width: 25%;
+    float: left
+}
+
+.jd-col-xs-6 {
+    width: 30%;
+    float: left
+}
+
+.jd-col-xs-7 {
+    width: 35%;
+    float: left
+}
+
+.jd-col-xs-8 {
+    width: 40%;
+    float: left
+}
+
+.jd-col-xs-9 {
+    width: 45%;
+    float: left
+}
+
+.jd-col-xs-10 {
+    width: 50%;
+    float: left
+}
+
+.jd-col-xs-11 {
+    width: 55%;
+    float: left
+}
+
+.jd-col-xs-12 {
+    width: 60%;
+    float: left
+}
+
+.jd-col-xs-13 {
+    width: 65%;
+    float: left
+}
+
+.jd-col-xs-14 {
+    width: 70%;
+    float: left
+}
+
+.jd-col-xs-15 {
+    width: 75%;
+    float: left
+}
+
+.jd-col-xs-16 {
+    width: 80%;
+    float: left
+}
+
+.jd-col-xs-17 {
+    width: 85%;
+    float: left
+}
+
+.jd-col-xs-18 {
+    width: 90%;
+    float: left
+}
+
+.jd-col-xs-19 {
+    width: 95%;
+    float: left
+}
+
+.jd-col-xs-20 {
+    width: 100%;
+    float: left
+}
+
+.jd-col-xs-push-1 {
+    left: 5%
+}
+
+.jd-col-xs-push-2 {
+    left: 10%
+}
+
+.jd-col-xs-push-3 {
+    left: 15%
+}
+
+.jd-col-xs-push-4 {
+    left: 20%
+}
+
+.jd-col-xs-push-5 {
+    left: 25%
+}
+
+.jd-col-xs-push-6 {
+    left: 30%
+}
+
+.jd-col-xs-push-7 {
+    left: 35%
+}
+
+.jd-col-xs-push-8 {
+    left: 40%
+}
+
+.jd-col-xs-push-9 {
+    left: 45%
+}
+
+.jd-col-xs-push-10 {
+    left: 50%
+}
+
+.jd-col-xs-push-11 {
+    left: 55%
+}
+
+.jd-col-xs-push-12 {
+    left: 60%
+}
+
+.jd-col-xs-push-13 {
+    left: 65%
+}
+
+.jd-col-xs-push-14 {
+    left: 70%
+}
+
+.jd-col-xs-push-15 {
+    left: 75%
+}
+
+.jd-col-xs-push-16 {
+    left: 80%
+}
+
+.jd-col-xs-push-17 {
+    left: 85%
+}
+
+.jd-col-xs-push-18 {
+    left: 90%
+}
+
+.jd-col-xs-push-19 {
+    left: 95%
+}
+
+.jd-col-xs-push-20 {
+    left: 100%
+}
+
+.jd-col-xs-pull-1 {
+    right: 5%
+}
+
+.jd-col-xs-pull-2 {
+    right: 10%
+}
+
+.jd-col-xs-pull-3 {
+    right: 15%
+}
+
+.jd-col-xs-pull-4 {
+    right: 20%
+}
+
+.jd-col-xs-pull-5 {
+    right: 25%
+}
+
+.jd-col-xs-pull-6 {
+    right: 30%
+}
+
+.jd-col-xs-pull-7 {
+    right: 35%
+}
+
+.jd-col-xs-pull-8 {
+    right: 40%
+}
+
+.jd-col-xs-pull-9 {
+    right: 45%
+}
+
+.jd-col-xs-pull-10 {
+    right: 50%
+}
+
+.jd-col-xs-pull-11 {
+    right: 55%
+}
+
+.jd-col-xs-pull-12 {
+    right: 60%
+}
+
+.jd-col-xs-pull-13 {
+    right: 65%
+}
+
+.jd-col-xs-pull-14 {
+    right: 70%
+}
+
+.jd-col-xs-pull-15 {
+    right: 75%
+}
+
+.jd-col-xs-pull-16 {
+    right: 80%
+}
+
+.jd-col-xs-pull-17 {
+    right: 85%
+}
+
+.jd-col-xs-pull-18 {
+    right: 90%
+}
+
+.jd-col-xs-pull-19 {
+    right: 95%
+}
+
+.jd-col-xs-pull-20 {
+    right: 100%
+}
+
+.jd-col-xs-offset-1 {
+    margin-left: 5%
+}
+
+.jd-col-xs-offset-2 {
+    margin-left: 10%
+}
+
+.jd-col-xs-offset-3 {
+    margin-left: 15%
+}
+
+.jd-col-xs-offset-4 {
+    margin-left: 20%
+}
+
+.jd-col-xs-offset-5 {
+    margin-left: 25%
+}
+
+.jd-col-xs-offset-6 {
+    margin-left: 30%
+}
+
+.jd-col-xs-offset-7 {
+    margin-left: 35%
+}
+
+.jd-col-xs-offset-8 {
+    margin-left: 40%
+}
+
+.jd-col-xs-offset-9 {
+    margin-left: 45%
+}
+
+.jd-col-xs-offset-10 {
+    margin-left: 50%
+}
+
+.jd-col-xs-offset-11 {
+    margin-left: 55%
+}
+
+.jd-col-xs-offset-12 {
+    margin-left: 60%
+}
+
+.jd-col-xs-offset-13 {
+    margin-left: 65%
+}
+
+.jd-col-xs-offset-14 {
+    margin-left: 70%
+}
+
+.jd-col-xs-offset-15 {
+    margin-left: 75%
+}
+
+.jd-col-xs-offset-16 {
+    margin-left: 80%
+}
+
+.jd-col-xs-offset-17 {
+    margin-left: 85%
+}
+
+.jd-col-xs-offset-18 {
+    margin-left: 90%
+}
+
+.jd-col-xs-offset-19 {
+    margin-left: 95%
+}
+
+.jd-col-xs-offset-20 {
+    margin-left: 100%
+}
+
+.jd-block-xs-visible {
+    display: none!important
+}
+
+@media (max-width:767px) {
+    .jd-block-xs-visible {
+        display: block!important
+    }
+}
+
+@media (min-width:768px) {
+    .jd-col-sm-1 {
+        width: 5%;
+        float: left
+    }
+    .jd-col-sm-2 {
+        width: 10%;
+        float: left
+    }
+    .jd-col-sm-3 {
+        width: 15%;
+        float: left
+    }
+    .jd-col-sm-4 {
+        width: 20%;
+        float: left
+    }
+    .jd-col-sm-5 {
+        width: 25%;
+        float: left
+    }
+    .jd-col-sm-6 {
+        width: 30%;
+        float: left
+    }
+    .jd-col-sm-7 {
+        width: 35%;
+        float: left
+    }
+    .jd-col-sm-8 {
+        width: 40%;
+        float: left
+    }
+    .jd-col-sm-9 {
+        width: 45%;
+        float: left
+    }
+    .jd-col-sm-10 {
+        width: 50%;
+        float: left
+    }
+    .jd-col-sm-11 {
+        width: 55%;
+        float: left
+    }
+    .jd-col-sm-12 {
+        width: 60%;
+        float: left
+    }
+    .jd-col-sm-13 {
+        width: 65%;
+        float: left
+    }
+    .jd-col-sm-14 {
+        width: 70%;
+        float: left
+    }
+    .jd-col-sm-15 {
+        width: 75%;
+        float: left
+    }
+    .jd-col-sm-16 {
+        width: 80%;
+        float: left
+    }
+    .jd-col-sm-17 {
+        width: 85%;
+        float: left
+    }
+    .jd-col-sm-18 {
+        width: 90%;
+        float: left
+    }
+    .jd-col-sm-19 {
+        width: 95%;
+        float: left
+    }
+    .jd-col-sm-20 {
+        width: 100%;
+        float: left
+    }
+    .jd-col-sm-push-1 {
+        left: 5%
+    }
+    .jd-col-sm-push-2 {
+        left: 10%
+    }
+    .jd-col-sm-push-3 {
+        left: 15%
+    }
+    .jd-col-sm-push-4 {
+        left: 20%
+    }
+    .jd-col-sm-push-5 {
+        left: 25%
+    }
+    .jd-col-sm-push-6 {
+        left: 30%
+    }
+    .jd-col-sm-push-7 {
+        left: 35%
+    }
+    .jd-col-sm-push-8 {
+        left: 40%
+    }
+    .jd-col-sm-push-9 {
+        left: 45%
+    }
+    .jd-col-sm-push-10 {
+        left: 50%
+    }
+    .jd-col-sm-push-11 {
+        left: 55%
+    }
+    .jd-col-sm-push-12 {
+        left: 60%
+    }
+    .jd-col-sm-push-13 {
+        left: 65%
+    }
+    .jd-col-sm-push-14 {
+        left: 70%
+    }
+    .jd-col-sm-push-15 {
+        left: 75%
+    }
+    .jd-col-sm-push-16 {
+        left: 80%
+    }
+    .jd-col-sm-push-17 {
+        left: 85%
+    }
+    .jd-col-sm-push-18 {
+        left: 90%
+    }
+    .jd-col-sm-push-19 {
+        left: 95%
+    }
+    .jd-col-sm-push-20 {
+        left: 100%
+    }
+    .jd-col-sm-pull-1 {
+        right: 5%
+    }
+    .jd-col-sm-pull-2 {
+        right: 10%
+    }
+    .jd-col-sm-pull-3 {
+        right: 15%
+    }
+    .jd-col-sm-pull-4 {
+        right: 20%
+    }
+    .jd-col-sm-pull-5 {
+        right: 25%
+    }
+    .jd-col-sm-pull-6 {
+        right: 30%
+    }
+    .jd-col-sm-pull-7 {
+        right: 35%
+    }
+    .jd-col-sm-pull-8 {
+        right: 40%
+    }
+    .jd-col-sm-pull-9 {
+        right: 45%
+    }
+    .jd-col-sm-pull-10 {
+        right: 50%
+    }
+    .jd-col-sm-pull-11 {
+        right: 55%
+    }
+    .jd-col-sm-pull-12 {
+        right: 60%
+    }
+    .jd-col-sm-pull-13 {
+        right: 65%
+    }
+    .jd-col-sm-pull-14 {
+        right: 70%
+    }
+    .jd-col-sm-pull-15 {
+        right: 75%
+    }
+    .jd-col-sm-pull-16 {
+        right: 80%
+    }
+    .jd-col-sm-pull-17 {
+        right: 85%
+    }
+    .jd-col-sm-pull-18 {
+        right: 90%
+    }
+    .jd-col-sm-pull-19 {
+        right: 95%
+    }
+    .jd-col-sm-pull-20 {
+        right: 100%
+    }
+    .jd-col-sm-offset-1 {
+        margin-left: 5%
+    }
+    .jd-col-sm-offset-2 {
+        margin-left: 10%
+    }
+    .jd-col-sm-offset-3 {
+        margin-left: 15%
+    }
+    .jd-col-sm-offset-4 {
+        margin-left: 20%
+    }
+    .jd-col-sm-offset-5 {
+        margin-left: 25%
+    }
+    .jd-col-sm-offset-6 {
+        margin-left: 30%
+    }
+    .jd-col-sm-offset-7 {
+        margin-left: 35%
+    }
+    .jd-col-sm-offset-8 {
+        margin-left: 40%
+    }
+    .jd-col-sm-offset-9 {
+        margin-left: 45%
+    }
+    .jd-col-sm-offset-10 {
+        margin-left: 50%
+    }
+    .jd-col-sm-offset-11 {
+        margin-left: 55%
+    }
+    .jd-col-sm-offset-12 {
+        margin-left: 60%
+    }
+    .jd-col-sm-offset-13 {
+        margin-left: 65%
+    }
+    .jd-col-sm-offset-14 {
+        margin-left: 70%
+    }
+    .jd-col-sm-offset-15 {
+        margin-left: 75%
+    }
+    .jd-col-sm-offset-16 {
+        margin-left: 80%
+    }
+    .jd-col-sm-offset-17 {
+        margin-left: 85%
+    }
+    .jd-col-sm-offset-18 {
+        margin-left: 90%
+    }
+    .jd-col-sm-offset-19 {
+        margin-left: 95%
+    }
+    .jd-col-sm-offset-20 {
+        margin-left: 100%
+    }
+}
+
+.jd-block-sm-visible {
+    display: none!important
+}
+
+@media (min-width:768px) and (max-width:991px) {
+    .jd-block-sm-visible {
+        display: block!important
+    }
+}
+
+@media (min-width:992px) {
+    .jd-col-md-1 {
+        width: 5%;
+        float: left
+    }
+    .jd-col-md-2 {
+        width: 10%;
+        float: left
+    }
+    .jd-col-md-3 {
+        width: 15%;
+        float: left
+    }
+    .jd-col-md-4 {
+        width: 20%;
+        float: left
+    }
+    .jd-col-md-5 {
+        width: 25%;
+        float: left
+    }
+    .jd-col-md-6 {
+        width: 30%;
+        float: left
+    }
+    .jd-col-md-7 {
+        width: 35%;
+        float: left
+    }
+    .jd-col-md-8 {
+        width: 40%;
+        float: left
+    }
+    .jd-col-md-9 {
+        width: 45%;
+        float: left
+    }
+    .jd-col-md-10 {
+        width: 50%;
+        float: left
+    }
+    .jd-col-md-11 {
+        width: 55%;
+        float: left
+    }
+    .jd-col-md-12 {
+        width: 60%;
+        float: left
+    }
+    .jd-col-md-13 {
+        width: 65%;
+        float: left
+    }
+    .jd-col-md-14 {
+        width: 70%;
+        float: left
+    }
+    .jd-col-md-15 {
+        width: 75%;
+        float: left
+    }
+    .jd-col-md-16 {
+        width: 80%;
+        float: left
+    }
+    .jd-col-md-17 {
+        width: 85%;
+        float: left
+    }
+    .jd-col-md-18 {
+        width: 90%;
+        float: left
+    }
+    .jd-col-md-19 {
+        width: 95%;
+        float: left
+    }
+    .jd-col-md-20 {
+        width: 100%;
+        float: left
+    }
+    .jd-col-md-push-1 {
+        left: 5%
+    }
+    .jd-col-md-push-2 {
+        left: 10%
+    }
+    .jd-col-md-push-3 {
+        left: 15%
+    }
+    .jd-col-md-push-4 {
+        left: 20%
+    }
+    .jd-col-md-push-5 {
+        left: 25%
+    }
+    .jd-col-md-push-6 {
+        left: 30%
+    }
+    .jd-col-md-push-7 {
+        left: 35%
+    }
+    .jd-col-md-push-8 {
+        left: 40%
+    }
+    .jd-col-md-push-9 {
+        left: 45%
+    }
+    .jd-col-md-push-10 {
+        left: 50%
+    }
+    .jd-col-md-push-11 {
+        left: 55%
+    }
+    .jd-col-md-push-12 {
+        left: 60%
+    }
+    .jd-col-md-push-13 {
+        left: 65%
+    }
+    .jd-col-md-push-14 {
+        left: 70%
+    }
+    .jd-col-md-push-15 {
+        left: 75%
+    }
+    .jd-col-md-push-16 {
+        left: 80%
+    }
+    .jd-col-md-push-17 {
+        left: 85%
+    }
+    .jd-col-md-push-18 {
+        left: 90%
+    }
+    .jd-col-md-push-19 {
+        left: 95%
+    }
+    .jd-col-md-push-20 {
+        left: 100%
+    }
+    .jd-col-md-pull-1 {
+        right: 5%
+    }
+    .jd-col-md-pull-2 {
+        right: 10%
+    }
+    .jd-col-md-pull-3 {
+        right: 15%
+    }
+    .jd-col-md-pull-4 {
+        right: 20%
+    }
+    .jd-col-md-pull-5 {
+        right: 25%
+    }
+    .jd-col-md-pull-6 {
+        right: 30%
+    }
+    .jd-col-md-pull-7 {
+        right: 35%
+    }
+    .jd-col-md-pull-8 {
+        right: 40%
+    }
+    .jd-col-md-pull-9 {
+        right: 45%
+    }
+    .jd-col-md-pull-10 {
+        right: 50%
+    }
+    .jd-col-md-pull-11 {
+        right: 55%
+    }
+    .jd-col-md-pull-12 {
+        right: 60%
+    }
+    .jd-col-md-pull-13 {
+        right: 65%
+    }
+    .jd-col-md-pull-14 {
+        right: 70%
+    }
+    .jd-col-md-pull-15 {
+        right: 75%
+    }
+    .jd-col-md-pull-16 {
+        right: 80%
+    }
+    .jd-col-md-pull-17 {
+        right: 85%
+    }
+    .jd-col-md-pull-18 {
+        right: 90%
+    }
+    .jd-col-md-pull-19 {
+        right: 95%
+    }
+    .jd-col-md-pull-20 {
+        right: 100%
+    }
+    .jd-col-md-offset-1 {
+        margin-left: 5%
+    }
+    .jd-col-md-offset-2 {
+        margin-left: 10%
+    }
+    .jd-col-md-offset-3 {
+        margin-left: 15%
+    }
+    .jd-col-md-offset-4 {
+        margin-left: 20%
+    }
+    .jd-col-md-offset-5 {
+        margin-left: 25%
+    }
+    .jd-col-md-offset-6 {
+        margin-left: 30%
+    }
+    .jd-col-md-offset-7 {
+        margin-left: 35%
+    }
+    .jd-col-md-offset-8 {
+        margin-left: 40%
+    }
+    .jd-col-md-offset-9 {
+        margin-left: 45%
+    }
+    .jd-col-md-offset-10 {
+        margin-left: 50%
+    }
+    .jd-col-md-offset-11 {
+        margin-left: 55%
+    }
+    .jd-col-md-offset-12 {
+        margin-left: 60%
+    }
+    .jd-col-md-offset-13 {
+        margin-left: 65%
+    }
+    .jd-col-md-offset-14 {
+        margin-left: 70%
+    }
+    .jd-col-md-offset-15 {
+        margin-left: 75%
+    }
+    .jd-col-md-offset-16 {
+        margin-left: 80%
+    }
+    .jd-col-md-offset-17 {
+        margin-left: 85%
+    }
+    .jd-col-md-offset-18 {
+        margin-left: 90%
+    }
+    .jd-col-md-offset-19 {
+        margin-left: 95%
+    }
+    .jd-col-md-offset-20 {
+        margin-left: 100%
+    }
+}
+
+.jd-block-md-visible {
+    display: none!important
+}
+
+@media (min-width:992px) and (max-width:1199px) {
+    .jd-block-md-visible {
+        display: block!important
+    }
+}
+
+@media (min-width:1200px) {
+    .jd-col-lg-1 {
+        width: 5%;
+        float: left
+    }
+    .jd-col-lg-2 {
+        width: 10%;
+        float: left
+    }
+    .jd-col-lg-3 {
+        width: 15%;
+        float: left
+    }
+    .jd-col-lg-4 {
+        width: 20%;
+        float: left
+    }
+    .jd-col-lg-5 {
+        width: 25%;
+        float: left
+    }
+    .jd-col-lg-6 {
+        width: 30%;
+        float: left
+    }
+    .jd-col-lg-7 {
+        width: 35%;
+        float: left
+    }
+    .jd-col-lg-8 {
+        width: 40%;
+        float: left
+    }
+    .jd-col-lg-9 {
+        width: 45%;
+        float: left
+    }
+    .jd-col-lg-10 {
+        width: 50%;
+        float: left
+    }
+    .jd-col-lg-11 {
+        width: 55%;
+        float: left
+    }
+    .jd-col-lg-12 {
+        width: 60%;
+        float: left
+    }
+    .jd-col-lg-13 {
+        width: 65%;
+        float: left
+    }
+    .jd-col-lg-14 {
+        width: 70%;
+        float: left
+    }
+    .jd-col-lg-15 {
+        width: 75%;
+        float: left
+    }
+    .jd-col-lg-16 {
+        width: 80%;
+        float: left
+    }
+    .jd-col-lg-17 {
+        width: 85%;
+        float: left
+    }
+    .jd-col-lg-18 {
+        width: 90%;
+        float: left
+    }
+    .jd-col-lg-19 {
+        width: 95%;
+        float: left
+    }
+    .jd-col-lg-20 {
+        width: 100%;
+        float: left
+    }
+    .jd-col-lg-push-1 {
+        left: 5%
+    }
+    .jd-col-lg-push-2 {
+        left: 10%
+    }
+    .jd-col-lg-push-3 {
+        left: 15%
+    }
+    .jd-col-lg-push-4 {
+        left: 20%
+    }
+    .jd-col-lg-push-5 {
+        left: 25%
+    }
+    .jd-col-lg-push-6 {
+        left: 30%
+    }
+    .jd-col-lg-push-7 {
+        left: 35%
+    }
+    .jd-col-lg-push-8 {
+        left: 40%
+    }
+    .jd-col-lg-push-9 {
+        left: 45%
+    }
+    .jd-col-lg-push-10 {
+        left: 50%
+    }
+    .jd-col-lg-push-11 {
+        left: 55%
+    }
+    .jd-col-lg-push-12 {
+        left: 60%
+    }
+    .jd-col-lg-push-13 {
+        left: 65%
+    }
+    .jd-col-lg-push-14 {
+        left: 70%
+    }
+    .jd-col-lg-push-15 {
+        left: 75%
+    }
+    .jd-col-lg-push-16 {
+        left: 80%
+    }
+    .jd-col-lg-push-17 {
+        left: 85%
+    }
+    .jd-col-lg-push-18 {
+        left: 90%
+    }
+    .jd-col-lg-push-19 {
+        left: 95%
+    }
+    .jd-col-lg-push-20 {
+        left: 100%
+    }
+    .jd-col-lg-pull-1 {
+        right: 5%
+    }
+    .jd-col-lg-pull-2 {
+        right: 10%
+    }
+    .jd-col-lg-pull-3 {
+        right: 15%
+    }
+    .jd-col-lg-pull-4 {
+        right: 20%
+    }
+    .jd-col-lg-pull-5 {
+        right: 25%
+    }
+    .jd-col-lg-pull-6 {
+        right: 30%
+    }
+    .jd-col-lg-pull-7 {
+        right: 35%
+    }
+    .jd-col-lg-pull-8 {
+        right: 40%
+    }
+    .jd-col-lg-pull-9 {
+        right: 45%
+    }
+    .jd-col-lg-pull-10 {
+        right: 50%
+    }
+    .jd-col-lg-pull-11 {
+        right: 55%
+    }
+    .jd-col-lg-pull-12 {
+        right: 60%
+    }
+    .jd-col-lg-pull-13 {
+        right: 65%
+    }
+    .jd-col-lg-pull-14 {
+        right: 70%
+    }
+    .jd-col-lg-pull-15 {
+        right: 75%
+    }
+    .jd-col-lg-pull-16 {
+        right: 80%
+    }
+    .jd-col-lg-pull-17 {
+        right: 85%
+    }
+    .jd-col-lg-pull-18 {
+        right: 90%
+    }
+    .jd-col-lg-pull-19 {
+        right: 95%
+    }
+    .jd-col-lg-pull-20 {
+        right: 100%
+    }
+    .jd-col-lg-offset-1 {
+        margin-left: 5%
+    }
+    .jd-col-lg-offset-2 {
+        margin-left: 10%
+    }
+    .jd-col-lg-offset-3 {
+        margin-left: 15%
+    }
+    .jd-col-lg-offset-4 {
+        margin-left: 20%
+    }
+    .jd-col-lg-offset-5 {
+        margin-left: 25%
+    }
+    .jd-col-lg-offset-6 {
+        margin-left: 30%
+    }
+    .jd-col-lg-offset-7 {
+        margin-left: 35%
+    }
+    .jd-col-lg-offset-8 {
+        margin-left: 40%
+    }
+    .jd-col-lg-offset-9 {
+        margin-left: 45%
+    }
+    .jd-col-lg-offset-10 {
+        margin-left: 50%
+    }
+    .jd-col-lg-offset-11 {
+        margin-left: 55%
+    }
+    .jd-col-lg-offset-12 {
+        margin-left: 60%
+    }
+    .jd-col-lg-offset-13 {
+        margin-left: 65%
+    }
+    .jd-col-lg-offset-14 {
+        margin-left: 70%
+    }
+    .jd-col-lg-offset-15 {
+        margin-left: 75%
+    }
+    .jd-col-lg-offset-16 {
+        margin-left: 80%
+    }
+    .jd-col-lg-offset-17 {
+        margin-left: 85%
+    }
+    .jd-col-lg-offset-18 {
+        margin-left: 90%
+    }
+    .jd-col-lg-offset-19 {
+        margin-left: 95%
+    }
+    .jd-col-lg-offset-20 {
+        margin-left: 100%
+    }
+}
+
+.jd-block-lg-visible {
+    display: none!important
+}
+
+@media (min-width:1200px) {
+    .jd-block-lg-visible {
+        display: block!important
+    }
+}
+
+.jd-col-lg-1,
+.jd-col-lg-10,
+.jd-col-lg-11,
+.jd-col-lg-12,
+.jd-col-lg-13,
+.jd-col-lg-14,
+.jd-col-lg-15,
+.jd-col-lg-16,
+.jd-col-lg-17,
+.jd-col-lg-18,
+.jd-col-lg-19,
+.jd-col-lg-2,
+.jd-col-lg-20,
+.jd-col-lg-3,
+.jd-col-lg-4,
+.jd-col-lg-5,
+.jd-col-lg-6,
+.jd-col-lg-7,
+.jd-col-lg-8,
+.jd-col-lg-9,
+.jd-col-md-1,
+.jd-col-md-10,
+.jd-col-md-11,
+.jd-col-md-12,
+.jd-col-md-13,
+.jd-col-md-14,
+.jd-col-md-15,
+.jd-col-md-16,
+.jd-col-md-17,
+.jd-col-md-18,
+.jd-col-md-19,
+.jd-col-md-2,
+.jd-col-md-20,
+.jd-col-md-3,
+.jd-col-md-4,
+.jd-col-md-5,
+.jd-col-md-6,
+.jd-col-md-7,
+.jd-col-md-8,
+.jd-col-md-9,
+.jd-col-sm-1,
+.jd-col-sm-10,
+.jd-col-sm-11,
+.jd-col-sm-12,
+.jd-col-sm-13,
+.jd-col-sm-14,
+.jd-col-sm-15,
+.jd-col-sm-16,
+.jd-col-sm-17,
+.jd-col-sm-18,
+.jd-col-sm-19,
+.jd-col-sm-2,
+.jd-col-sm-20,
+.jd-col-sm-3,
+.jd-col-sm-4,
+.jd-col-sm-5,
+.jd-col-sm-6,
+.jd-col-sm-7,
+.jd-col-sm-8,
+.jd-col-sm-9,
+.jd-col-xs-1,
+.jd-col-xs-10,
+.jd-col-xs-11,
+.jd-col-xs-12,
+.jd-col-xs-13,
+.jd-col-xs-14,
+.jd-col-xs-15,
+.jd-col-xs-16,
+.jd-col-xs-17,
+.jd-col-xs-18,
+.jd-col-xs-19,
+.jd-col-xs-2,
+.jd-col-xs-20,
+.jd-col-xs-3,
+.jd-col-xs-4,
+.jd-col-xs-5,
+.jd-col-xs-6,
+.jd-col-xs-7,
+.jd-col-xs-8,
+.jd-col-xs-9 {
+    position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px
+}
+
+.jd-toolbar {
+    width: 100%;
+    display: inline-block
+}
+
+.jd-toolbar .jd-tb-menu,
+.jd-toolbar .jd-tb-tabs {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    list-style: none;
+    display: inline-block;
+    width: 100%;
+    float: left
+}
+
+.jd-toolbar .jd-tb-menu li,
+.jd-toolbar .jd-tb-tabs li {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    display: inline;
+    float: left
+}
+
+.jd-toolbar .jd-tb-menu .jd-tb-button,
+.jd-toolbar .jd-tb-tabs .jd-tb-button {
+    padding: 5px;
+    cursor: pointer;
+    margin: 0;
+    border: 0;
+    text-align: center;
+    min-width: 80px;
+    outline: 0
+}
+
+.jd-toolbar .jd-tb-menu .jd-tb-button i,
+.jd-toolbar .jd-tb-menu .jd-tb-button samp {
+    width: 100%;
+    display: block
+}
+
+.jd-toolbar-default {
+    background-color: #f5f6f7;
+    border: 1px solid #e7e7e7
+}
+
+.jd-toolbar-default .jd-tb-tabs {
+    background-color: #e7e7e7
+}
+
+.jd-toolbar-default .jd-tb-tabs .jd-tb-button {
+    color: #333;
+    border: 1px solid #e7e7e7;
+    text-decoration: none;
+    background-color: transparent;
+    outline: 0!important
+}
+
+.jd-toolbar-default .jd-tb-menu .jd-tb-button:hover,
+.jd-toolbar-default .jd-tb-tabs .jd-tb-button:hover {
+    background-color: #e8eff7;
+    border: 1px solid #a4cef9
+}
+
+.jd-toolbar-default .jd-tb-tabs .jd-tb-active {
+    background-color: #f5f6f7;
+    border-bottom: 1px solid #f5f6f7
+}
+
+.jd-toolbar-default .jd-tb-menu .jd-tb-button {
+    background-color: #f5f6f7;
+    border: 1px solid #f5f6f7
+}
+
+.jd-form-horizontal .jd-form-group {
+    margin-right: -15px;
+    margin-left: -15px
+}
+
+.jd-form-horizontal .jd-form-group::after {
+    clear: both;
+    display: table;
+    content: " "
+}
+
+.jd-form-horizontal .jd-control-label {
+    padding-top: 7px;
+    margin-bottom: 0;
+    text-align: right
+}
+
+.jd-form-horizontal .jd-checkbox,
+.jd-form-horizontal .jd-checkbox-inline,
+.jd-form-horizontal .jd-radio,
+.jd-form-horizontal .jd-radio-inline {
+    padding-top: 7px;
+    margin-top: 0;
+    margin-bottom: 0
+}
+
+.jd-form-horizontal .jd-checkbox,
+.jd-form-horizontal .jd-radio {
+    min-height: 27px
+}
+
+.jd-form-group {
+    margin-bottom: 15px
+}
+
+.jd-form-control {
+    display: block;
+    width: 100%;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s
+}
+
+.jd-form-control:focus {
+    border-color: #66afe9;
+    outline: 0;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6)
+}
+
+.jd-form-control::-moz-placeholder {
+    color: #999;
+    opacity: 1
+}
+
+.jd-form-control:-ms-input-placeholder {
+    color: #999
+}
+
+.jd-form-control::-webkit-input-placeholder {
+    color: #999
+}
+
+.jd-form-control::-ms-expand {
+    background-color: transparent;
+    border: 0
+}
+
+.jd-input-group .jd-form-control {
+    position: relative;
+    z-index: 2;
+    float: left;
+    width: 100%;
+    margin-bottom: 0
+}
+
+.jd-input-group .jd-form-control:focus {
+    z-index: 3
+}
+
+input.jd-form-control::-ms-clear,
+input.jd-form-control::-ms-reveal {
+    display: none
+}
+
+.jd-input-group .jd-form-control,
+.jd-input-group-addon,
+.jd-input-group-btn {
+    display: table-cell
+}
+
+.jd-input-group .jd-form-control:not(:first-child):not(:last-child),
+.jd-input-group-addon:not(:first-child):not(:last-child),
+.jd-input-group-btn:not(:first-child):not(:last-child) {
+    border-radius: 0
+}
+
+.jd-input-group-addon {
+    white-space: nowrap
+}
+
+.jd-input-group-addon,
+.jd-input-group-btn {
+    width: 1%;
+    vertical-align: middle
+}
+
+.jd-input-group-addon {
+    padding: 6px 12px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1;
+    color: #555;
+    text-align: center;
+    background-color: #eee;
+    border: 1px solid #ccc;
+    border-radius: 4px
+}
+
+.jd-input-group-addon input[type=checkbox],
+.jd-input-group-addon input[type=radio] {
+    margin-top: 0
+}
+
+.jd-input-group .jd-form-control:first-child,
+.jd-input-group-addon:first-child,
+.jd-input-group-btn:first-child>.jd-btn,
+.jd-input-group-btn:first-child>.jd-btn-group>.jd-btn,
+.jd-input-group-btn:first-child>.jd-dropdown-toggle,
+.jd-input-group-btn:last-child>.jd-btn-group:not(:last-child)>.jd-btn,
+.jd-input-group-btn:last-child>.jd-btn:not(:last-child):not(.jd-dropdown-toggle) {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0
+}
+
+.jd-input-group-addon:first-child {
+    border-right: 0
+}
+
+.jd-input-group .jd-form-control:last-child,
+.jd-input-group-addon:last-child,
+.jd-input-group-btn:first-child>.jd-btn-group:not(:first-child)>.jd-btn,
+.jd-input-group-btn:first-child>.jd-btn:not(:first-child),
+.jd-input-group-btn:last-child>.jd-btn,
+.jd-input-group-btn:last-child>.jd-btn-group>.jd-btn,
+.jd-input-group-btn:last-child>.jd-dropdown-toggle {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0
+}
+
+.jd-input-group-addon:last-child {
+    border-left: 0
+}
+
+.jd-input-group-btn {
+    position: relative;
+    font-size: 0;
+    white-space: nowrap
+}
+
+.jd-input-group-btn>.jd-btn {
+    position: relative
+}
+
+.jd-input-group-btn>.jd-btn+.jd-btn {
+    margin-left: -1px
+}
+
+.jd-input-group-btn>.jd-btn:active,
+.jd-input-group-btn>.jd-btn:focus,
+.jd-input-group-btn>.jd-btn:hover {
+    z-index: 2
+}
+
+.jd-input-group-btn:first-child>.jd-btn,
+.jd-input-group-btn:first-child>.jd-btn-group {
+    margin-right: -1px
+}
+
+.jd-input-group-btn:last-child>.jd-btn,
+.jd-input-group-btn:last-child>.jd-btn-group {
+    z-index: 2;
+    margin-left: -1px
 }
